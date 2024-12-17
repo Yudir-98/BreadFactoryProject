@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 40px;
+  border-top: 40px;
+}
+
+.fullScreen {
+  /* border: 1px solid #ccc; */
+  border-radius: 20px;
+  top: 0.2vh;
+  width: 99vw;
+  height: 99vh;
+  background-color: #312726;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+
+.MainContent {
+  width: 62vw;
+  height: 750px;
+  margin: 20px;
+  border-radius: 20px;
+  background-color: white;
+  opacity: 1;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-top: 120px;
+}
+
+.Menu {
+  position:fixed;
+  height: 100vh;
+  width: 500px;
+  left: 6px;
+  background-color: #a8a8a8;
+  border-radius: 20px;
+}
+
+.Personal {
+  border: 1px solid #ccc;
+  position: fixed;
+  height: 70px;
+  width: 160px;
+  top: 0px;
+  right: 6px;
+}
+
+#icon-box {
+  border: 1px solid black;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+.login-box {
+  /* border: 1px solid black; */
+  width: 400px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  align-items: flex-end;
+}
+.input-box {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.login-button {
+  background-color: #312726;
+  color: white;
+  font-size:20px;
+  border-radius: 5px;
+  height: 40px;
+  width: 100%;
+  margin-top: 20px;
+}
