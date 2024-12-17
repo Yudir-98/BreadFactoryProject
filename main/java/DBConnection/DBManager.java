@@ -19,7 +19,7 @@ public class DBManager {
 			// 등록된 드라이버를 실제 Connection 클래스 변수에 연결
 			conn = DriverManager.getConnection(
 					"jdbc:oracle:thin:@1.220.247.78:1522/orcl",
-					"tmini_2410_team1",
+					"mini_2410_team1",
 					"1234"
 			);
 			System.out.println("Oracle DB 접속 성공");
