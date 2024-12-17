@@ -21,6 +21,10 @@
     <!--<div class="Menu">MenuBox</div>-->
     <div class="Personal">LoginBox</div>
   </div>
-
+  <script>
+  	document.addEventListener("DOMContentLoaded", function() {
+  		const LoginButton = document.querySelector(".login-button")
+  	});
+  </script>
 </body>
 </html>
