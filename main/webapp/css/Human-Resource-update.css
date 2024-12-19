@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 40px;
+  border-top: 40px;
+}
+.fullScreen {
+  /* border: 1px solid #ccc; */
+  border-radius: 20px;
+  top: 0.2vh;
+  width: 99vw;
+  height: 99vh;
+  background-color: #312726;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.MainContent {
+  border: 1px solid #ccc;
+  width: 62vw;
+  height: 700px;
+  margin: 20px;
+  border-radius: 20px;
+  background-color: white;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
+}
+.MainContent > .Announcement {
+  border: 1px soild #ccc;
+  width: 59vw;
+  height: 50px;
+  background-color:#312726;
+  border-radius: 10px;
+}
+.Menu {
+  position:fixed;
+  height: 100vh;
+  width: 500px;
+  left: 6px;
+  background-color: #a8a8a8;
+  border-radius: 20px;
+}
+.Menu {
+  position: fixed;
+  height: 60px;
+  width: 50px;
+  top: 0px;
+  right: 6px;
+  background-color:#312726;
+}
+.menu1 {
+  border: 1px solid #ccc;
+  width: 30px;
+  height: 3px;
+  margin-top: 15px;
+  margin-left: 10px;
+  background-color: white;
+}
+.menu2 {
+  border: 1px solid #ccc;
+  width: 30px;
+  height: 3px;
+  margin-top: 5px;
+  margin-left: 10px;
+  background-color: white;
+}
+.menu3 {
+  border: 1px solid #ccc;
+  width: 30px;
+  height: 3px;
+  margin-top: 5px;
+  margin-left: 10px;
+  background-color: white;
+}
+
+.Personal {
+  position: fixed;
+  height: 70px;
+  width: 160px;
+  top: 0px;
+  right: 6px;
+}
+.Personal > #login_box {
+  border: 1px solid #ccc;
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 30px;
+  background-color: white;
+  border-radius: 50%;
+}
+.Personal > #message_box {
+    border: 1px solid #ccc;
+    width: 50px;
+    height: 50px;
+    margin-top: -50px;
+    margin-left: 90px;
+    background-color: white;
+    border-radius: 50%;
+}
+.content{
+  width: 59vw;
+  color: black;
+  padding: 15px;
+  line-height: 50px;
+}
+input{
+  width: 300px;
+  height: 35px;
+}
+select{
+  width: 300px;
+  height: 35px;
+}
+.buttons{
+  margin-left: 550px;
+}
+button{
+  width: 80px;
+  height: 40px;
+}
+.update-button{
+  background-color: #3046aa;
+  border-radius: 10px;
+}
+.update-button:hover{
+  cursor: pointer;
+}
+.cancel-button{
+  background-color: #9e291f;
+  border-radius: 10px;
+}
+.cancel-button:hover{
+  cursor: pointer;
+}

@@ -1,0 +1,278 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 40px;
+  border-top: 40px;
+}
+.fullScreen {
+  /* border: 1px solid #ccc; */
+  border-radius: 20px;
+  top: 0.2vh;
+  width: 99vw;
+  background-color: #312726;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.MainContent {
+  border: 1px solid #ccc;
+  width: 62vw;
+  margin: 20px;
+  border-radius: 20px;
+  background-color: white;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  margin-top: 200px;
+}
+.MainContent > .Announcement {
+  border: 1px soild #ccc;
+  width: 59vw;
+  height: 50px;
+  background-color:#312726;
+  border-radius: 10px;
+  display: flex;
+  align-content : space-between;
+}
+.add-button{
+  background-color: #ffffff;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #312726;
+  margin-left:560px;
+  margin-top: 7px;
+}
+.add-button:hover{
+  cursor: pointer;
+}
+.MainContentBox {
+  /*border: 1px solid #ccc;*/
+  width: 59vw;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 15px;
+  color: black;
+}
+.title{
+  /*border: 1px solid #ccc;*/
+  width: 59vw;
+  height: 70px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom : 3px solid black;
+}
+.title1{
+  padding: 34px;
+  font-size:20px;
+}
+.title2{
+  padding: 16px;
+  font-size:20px;
+}
+.title3{
+  padding: 25px;
+  font-size:20px;
+}
+.title4{
+  padding: 25px;
+  font-size:20px;
+}
+.Menu {
+  position:fixed;
+  height: 100vh;
+  width: 500px;
+  left: 6px;
+  background-color: #a8a8a8;
+  border-radius: 20px;
+}
+.Menu {
+  position: fixed;
+  height: 60px;
+  width: 50px;
+  top: 0px;
+  right: 6px;
+  background-color:#312726;
+}
+.menu1 {
+  border: 1px solid #ccc;
+  width: 30px;
+  height: 3px;
+  margin-top: 15px;
+  margin-left: 10px;
+  background-color: white;
+}
+.menu2 {
+  border: 1px solid #ccc;
+  width: 30px;
+  height: 3px;
+  margin-top: 5px;
+  margin-left: 10px;
+  background-color: white;
+}
+.menu3 {
+  border: 1px solid #ccc;
+  width: 30px;
+  height: 3px;
+  margin-top: 5px;
+  margin-left: 10px;
+  background-color: white;
+}
+
+.Personal {
+  position: fixed;
+  height: 70px;
+  width: 160px;
+  top: 0px;
+  right: 6px;
+}
+.Personal > #login_box {
+  border: 1px solid #ccc;
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 30px;
+  background-color: white;
+  border-radius: 50%;
+}
+.Personal > #message_box {
+    border: 1px solid #ccc;
+    width: 50px;
+    height: 50px;
+    margin-top: -50px;
+    margin-left: 90px;
+    background-color: white;
+    border-radius: 50%;
+}
+/*
+.RowLine {
+  position: absolute;
+  height: 3px;
+  width: 59%;
+  background-color: black;
+  top: 320px;
+}
+.RightLine1{
+  position: absolute;
+  height: 490px;
+  width: 2px;
+  background-color: black;
+  top: 330px;
+  left : 410px;
+}
+.RightLine2{
+  position: absolute;
+  height: 490px;
+  width: 2px;
+  background-color: black;
+  top: 330px;
+  left : 540px;
+}
+.RightLine3{
+  position: absolute;
+  height: 490px;
+  width: 2px;
+  background-color: black;
+  top: 330px;
+  left : 635px;
+}
+.RightLine4{
+  position: absolute;
+  height: 490px;
+  width: 2px;
+  background-color: black;
+  top: 330px;
+  left : 720px;
+}
+*/
+.content{
+  display: flex;
+}
+.emp-id{
+    /*border: 1px solid #ccc;*/
+    width: 11vw;
+    margin-left: 7px;
+    margin-top: 1vw;
+    margin-bottom:1vw;
+    background-color: white;
+    list-style-type: none;
+    line-height:30px;
+    text-align:center;
+    border-right: 1px solid black;
+
+}
+.emp-name{
+  /*border: 1px solid #ccc;*/
+  width: 9vw;
+  margin-left: 10px;
+  margin-top: 1vw;
+  margin-bottom:1vw;
+  background-color: white;
+  list-style-type: none;
+  line-height:30px;
+  text-align:center;
+  border-right: 1px solid black;
+
+  padding-right : 2px;
+}
+.department{
+  /*border: 1px solid #ccc;*/
+  width: 7vw;
+  margin-left: 7px;
+  margin-top: 1vw;
+  margin-bottom:1vw;
+  background-color: white;
+  list-style-type: none;
+  line-height:30px;
+  text-align:center;
+  border-right: 1px solid black;
+
+}
+.position{
+  /*border: 1px solid #ccc;*/
+  width: 6vw;
+  margin-left: 9px;
+  margin-top: 1vw;
+  margin-bottom:1vw;
+  background-color: white;
+  list-style-type: none;
+  line-height:30px;
+  text-align:center;
+  border-right: 1px solid black;
+
+}
+.remake{
+  width: 20vw;
+  margin-left: 30px;
+  margin-top: 1vw;
+  background-color: white;
+  border-radius: 15px;
+  list-style-type: none;
+  line-height:30px;
+  text-align:center;
+}
+.update-button{
+	background-color:#312726;
+	color : white;
+	border-radius: 10px;
+	width:80px;
+	height:25px;
+}
+.delete-button{
+	background-color:#312726;
+	color : white;
+	border-radius: 10px;
+	width:80px;
+	height:25px;
+}

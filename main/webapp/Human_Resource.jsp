@@ -13,7 +13,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./css/Human-Resources.css">
+  <link rel="stylesheet" href="./css/Human-Resource.css">
 </head>
 <body>
   <div class="fullScreen">
@@ -189,5 +189,25 @@
       <div class="menu3"></div>
     </div>
   </div>
+  <script>
+  	//add-button 누르면 인원 추가
+  	let addbutton = document.querySelector('.add-button');
+  	
+  	addbutton.addEventListener('click', function(){
+  		location.href = './Human_Resource_add.jsp'
+  	});
+  	
+  	// 수정 버튼 누르면 수정
+  	let updatebutton = document.querySelectorAll(".update-button");
+
+  	for(let i = 0; i < updatebutton.length; i++) {
+  		updatebutton[i].addEventListener('click', function(){
+  	  		const emp_id = updatebutton[i].getAttribute("emp-id");
+  	  		location.href = './Human_Resource_update.jsp?emp_id=' + emp_id;
+  	  	});
+  	}
+	
+  	
+  </script>
 </body>
 </html>
