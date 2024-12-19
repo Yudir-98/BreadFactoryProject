@@ -18,8 +18,6 @@
         <button class="login-button">로그인</button>
       </form>
     </div>
-    <!--<div class="Menu">MenuBox</div>-->
-    <div class="Personal">LoginBox</div>
   </div>
   <script>
   	document.addEventListener("DOMContentLoaded", function() {

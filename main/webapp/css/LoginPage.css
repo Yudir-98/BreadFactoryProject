@@ -27,7 +27,7 @@ body {
 
 .MainContent {
   width: 800px;
-  height: 750px;
+  height: 80%;
   margin: 20px;
   border-radius: 20px;
   background-color: white;
@@ -47,15 +47,6 @@ body {
   left: 6px;
   background-color: #a8a8a8;
   border-radius: 20px;
-}
-
-.Personal {
-  border: 1px solid #ccc;
-  position: fixed;
-  height: 70px;
-  width: 160px;
-  top: 0px;
-  right: 6px;
 }
 
 #icon-box {
