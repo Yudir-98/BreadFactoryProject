@@ -206,7 +206,19 @@
   	  		location.href = './Human_Resource_update.jsp?emp_id=' + emp_id;
   	  	});
   	}
-	
+  	
+  	// 삭제 버튼 누르면 
+	let deletebutton = document.querySelectorAll(".delete-button");
+
+  	for(let i = 0; i < deletebutton.length; i++) {
+  		deletebutton[i].addEventListener('click', function(){
+  	  		const emp_id = deletebutton[i].getAttribute("emp-id");
+  	  		if(confirm('삭제하시겠습니까?')){
+  	  		location.href = './Human_Resource_delete.jsp?emp_id=' + emp_id;
+  	  		}
+  	  		
+  	  	});
+  	}
   	
   </script>
 </body>
