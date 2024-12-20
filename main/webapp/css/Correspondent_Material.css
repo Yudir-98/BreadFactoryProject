@@ -73,39 +73,7 @@ body {
     top: 0px;
     right: 6px;
   }
-  .Menu {
-    position:fixed;
-    height: 100vh;
-    width: 500px;
-    left: 6px;
-    border-radius: 20px;
-  }
-
-  .menu1 {
-    border: 1px solid #ccc;
-    width: 30px;
-    height: 3px;
-    margin-top: 15px;
-    margin-left: 10px;
-    background-color: white;
-  }
-  
-  .menu2 {
-    border: 1px solid #ccc;
-    width: 30px;
-    height: 3px;
-    margin-top: 5px;
-    margin-left: 10px;
-    background-color: white;
-  }
-  .menu3 {
-    border: 1px solid #ccc;
-    width: 30px;
-    height: 3px;
-    margin-top: 5px;
-    margin-left: 10px;
-    background-color: white;
-  }
+ 
 .Accounts {
     
     height: 50px;

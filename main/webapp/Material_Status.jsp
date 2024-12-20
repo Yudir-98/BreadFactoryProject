@@ -67,11 +67,7 @@
       <div id="login_box"></div>
       <div id="message_box"></div>
     </div>
-    <div class="Menu">
-      <div class="menu1"></div>
-      <div class="menu2"></div>
-      <div class="menu3"></div>
-    </div>
+
       <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
