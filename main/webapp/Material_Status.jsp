@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
@@ -19,7 +19,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./css/Correspondent_Material.css">
+  <link rel="stylesheet" href="./css/Material_Status.css">
 </head>
 <body>
   <div class="fullScreen">
@@ -27,31 +27,35 @@
     <div class="MainContent">
       <div class="box1">
         <div class="Announcement">
-          거래처 관리
+          자재현황 관리
         </div>
       </div>
     <div class="Box1">
       <div class="box2">
         <div class="Accounts">
-          <div class="Account" id="company">거래처명</div>
-          <div class="Account" id="item">거래 품목</div>
+          <div class="Account" id="company">원자재</div>
+          <div class="Account" id="item">거래처명</div>
           <div class="Account" id="country">원산지</div>
-          <div class="Account" id="phone">Tel</div>
+          <div class="Account" id="phone">현재 보유량</div>
+          <div class="Account" id="comecheck">수입량</div>
         </div>
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
         <div class="line4"></div>
+        <div class="line5"></div>
       </div>
       <div class="box3">
+        
       </div>
     </div>
     <div class="Box2">
         <select class="search">
-          <option value="search1" selected>거래처명</option>
-          <option value="search1" >거래 품목</option>
+          <option value="search1" selected>원자재</option>
+          <option value="search1" >거래처명</option>
           <option value="search1" >원산지</option>
-          <option value="search1" >Tel</option>
+          <option value="search1" >현재 보유량</option>
+          <option value="search1" >수입량</option>
         </select>
         <div class="box5"></div>
         <button class="btn1">검색</button>
