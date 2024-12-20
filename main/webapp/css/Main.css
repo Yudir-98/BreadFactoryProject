@@ -145,23 +145,29 @@ body {
 }
 
 .Personal > #Login_box {
-  border: 1px solid #ccc;
   width: 50px;
   height: 50px;
   margin-top: 10px;
   margin-left: 30px;
   background-color: white;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .Personal > #message_box {
-    border: 1px solid #ccc;
     width: 50px;
     height: 50px;
     margin-top: -50px;
     margin-left: 90px;
     background-color: white;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .Personal > #Logout_box {
@@ -182,6 +188,39 @@ body {
 	text-decoration: none;
 	color: white;
 }
+
+#Login_icon {
+	color: #a8a8a8;
+	font-size: 42px;
+	margin-top: 6px;
+}
+
+#Message_icon {
+	color: #a8a8a8;
+	font-size: 36px;
+}
+
+.message_amount {
+	border: 1px solid red;
+	background-color: red;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	border-radius: 50% 50%;
+	right: 5px;
+	top: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	font-size: 23px;
+	padding-bottom: 4px;
+}
+
+.message_count {
+	font-weight: bold;
+}
+
 
 /* 메뉴 css */
 .MenuButton {

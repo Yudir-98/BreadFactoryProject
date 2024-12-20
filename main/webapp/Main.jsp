@@ -12,6 +12,27 @@
 
 	String user_id = request.getParameter("user_id");
 	String department_id = request.getParameter("department_id");
+	Integer message_count = 0;
+	String emp_id = "";
+	
+	Connection conn = DBManager.getDBConnection();
+
+	String sql ="SELECT emp_id " +
+				"FROM EMPLOYEES " +
+				"WHERE user_id = ?";
+	
+	try {
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, user_id);
+		
+		ResultSet rs = pstmt.executeQuery();
+		rs.next();
+		emp_id = rs.getString("emp_id");
+		
+		DBManager.dbClose(conn, pstmt, rs);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 %>
 
 <!DOCTYPE html>
@@ -42,9 +63,9 @@
           <ul class="Menu_Works">
           
 <%
-			Connection conn = DBManager.getDBConnection();
+			conn = DBManager.getDBConnection();
 
-			String sql ="SELECT work FROM DEPT_WORK " +
+			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
 			try {
@@ -90,6 +111,7 @@
     
 <!-- 메인 콘텐츠 -->
     <div class="MainContent">
+    
     <!-- 공지사항 -->
       <div class="Announcement">
         <div class="notices">
@@ -98,6 +120,7 @@
           <div class="notice" id="notice3"></div>
         </div>
       </div>
+      
     <!-- 메인 콘텐츠 박스 1 -->
       <div class="Main_ContentBox1">
         <div class="TodayWork"></div>
@@ -111,9 +134,34 @@
     </div>
 	
 <!-- 로그인 창 -->
+<%
+	conn = DBManager.getDBConnection();
+
+	sql ="SELECT message " + 
+		 "FROM MESSAGES " +
+		 "WHERE user_id = ? AND READ = 0";
+	
+	try {
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, user_id);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			message_count++;
+		}
+		
+		DBManager.dbClose(conn, pstmt, rs);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+%>
     <div class="Personal">
-      <div id="Login_box"></div>
-      <div id="message_box"></div>
+      <div id="Login_box"><a id="Login_icon"><i class="fa-solid fa-user"></i></a></div>
+      <div id="message_box">
+      	<a id="Message_icon"><i class="fa-solid fa-envelope"></i></a>
+      	<div class="message_amount"><span class="message_count"><%= message_count %></span></div>
+      </div>
       <div id="Logout_box"><a href='./Main.jsp'>로그아웃</a></div>
     </div>
     

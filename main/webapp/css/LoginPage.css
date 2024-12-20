@@ -50,11 +50,21 @@ body {
 }
 
 #icon-box {
-  border: 1px solid black;
+  background-color: #312726;
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+#Login_icon {
+	color: white;
+	font-size: 92px;
+	margin-top: 20px;
+}
+
 .login-box {
   /* border: 1px solid black; */
   width: 400px;
@@ -65,6 +75,7 @@ body {
   gap: 3px;
   align-items: flex-end;
 }
+
 .input-box {
   height: 50px;
   width: 100%;
@@ -72,6 +83,7 @@ body {
   border: 1px solid #ccc;
   padding: 10px;
 }
+
 .login-button {
   background-color: #312726;
   color: white;
