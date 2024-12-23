@@ -36,96 +36,63 @@
 		}
 %>
 <%
-
 	conn = DBManager.getDBConnection();
-	
-	emp_id = request.getParameter("emp_id");
-	String emp_id_now = emp_id;
-	String emp_name = "";
-	String birth_date = "";
-	String phone_number = "";
-	String hire_date = "";
-	String position = "";
-	String salary = "";
-	String user_password = "";
-	String user_email = "";
-	String user_nickname = "";
 
+	String material = request.getParameter("material");
+	String amount = "";
+	String unit = "";
 %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="EUC-KR">
-<title>인사 관리 수정 페이지</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="./css/Human-Resource-update.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>material 수정페이지</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./css/Inventory-update.css">
 </head>
 <body>
-	<div class="fullScreen">
-		<div class="MainContent">
-			<div class="Announcement">
-				<h1>&nbsp;수 정</h1>
-			</div>
+  <div class="fullScreen">
+    <div class="MainContent">
+      <div class="Announcement">
+        <h1>수 정</h1>
+      </div>
       <div class="content">
-<% 
+<%
 		conn = DBManager.getDBConnection();
+
+		sql = "SELECT amount, unit " +
+		 			 "FROM material " +
+					 "WHERE material = ?";
 		
-		sql = "SELECT a.emp_id, a.emp_name, a.birth_date, a.phone_number, a.hire_date, c.dept_name, a.position, a.salary, d.user_id, d.user_password, d.user_email, d.user_nickname " +
-			 	"FROM EMPLOYEES a, DEPT_EMP b, DEPARTMENT c, USERS d " + 
-				"WHERE a.emp_id = b.emp_id AND b.dept_id = c.dept_id AND a.user_id = d.user_id " +
-			 	"AND a.emp_id = ? ";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, emp_id_now);
+			pstmt.setString(1, material);
 			
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			emp_name = rs.getString("emp_name");
-			birth_date = rs.getString("birth_date");
-			phone_number = rs.getString("phone_number");
-			hire_date = rs.getString("hire_date");
-			position = rs.getString("position");
-			salary = rs.getString("salary");
-			user_id = rs.getString("user_id");
-			user_password = rs.getString("user_password");
-			user_email = rs.getString("user_email");
-			user_nickname = rs.getString("user_nickname");
+			amount = rs.getString("amount");
+			unit = rs.getString("unit");
 			
 			DBManager.dbClose(conn, pstmt, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 %>
-		<form id="form_information" action="./Human_Resource_update_form.jsp" method="POST">
-	        사원 번호 &nbsp;&nbsp;&nbsp;: <input type="text" value="<%= emp_id %>" name="emp_id" required>
-	        <br>
-	        사원 이름 &nbsp;&nbsp;&nbsp;: <input type="text" value="<%= emp_name %>" name="emp_name" required>
-	        <br>
-	        생년월일 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= birth_date %>" name="birth_date" required>
-	        <br>
-	        핸드폰번호 &nbsp;: <input type="text" value="<%= phone_number %>" name="phone_number" required>
-	        <br>
-	        입사일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= hire_date %>" name="hire_date" required>
-	        <br>
-	        직책 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= position %>" name="position" required>
-	        <br>
-	        급여 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= salary %>" name="salary" required>
-	        <hr>
-	        아이디 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= user_id %>" name="user_id" required>
-	        <br>
-	        비밀번호 &nbsp;&nbsp;&nbsp;: <input type="password" value="<%= user_password %>" name="user_password" required>
-	        <br>
-	        이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="email" value="<%= user_email %>"  name="user_email" required>
-	        <br>
-	        닉네임 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= user_nickname %>" name="user_nickname" >
-	         </form>
-	        <div class="buttons">
-	        <button class="update-button">수 정</button>
-	        <button class="cancel-button">취 소</button>
-       
+		<form id="form_information" action="./Inventory-update-form.jsp" method="POST">
+        재 료&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= material %>" name="material" required>
+        <br>
+        수 량&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= amount %>" name="amount" required>
+        <br>
+        단 위&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= unit %>" name="unit" required>
+        </form>
+        <div class="buttons">
+          <button class="update-button">수 정</button>
+          <button class="cancel-button">취 소</button>
         </div>
       </div>
-		 <!-- 메뉴 바 -->
+    </div>
+    <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
       <div class="menuButtonBar"></div>
@@ -213,15 +180,15 @@
       <div id="Logout_box"><a href='./Main.jsp'>로그아웃</a></div>
     </div>
 <!-- 여기까지 -->
-	</div>
-	<script>
+  </div>
+<script>
 	//------------ 메뉴박스 --------------------
 	let user_id = "<%= user_id %>";
 		let MenuButton = document.querySelector(".MenuButton");
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
-
+	
 	//------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
 	let LoginBox = document.querySelector("#Login_box");
@@ -285,12 +252,13 @@
 		} else {
 			LogoutBox.style.height = '0px';
 		}
-    }  	
+    }
+	
 	//취소 버튼 눌렀을 때
 	let cancelbutton = document.querySelector('.cancel-button');
 	
 	cancelbutton.addEventListener('click', function(){
-		location.href = './Human_Resource.jsp'
+		location.href = './Inventory.jsp'
 	});
 	//수정 버튼 눌렀을 때
 	let updatebutton = document.querySelector('.update-button');
@@ -301,6 +269,6 @@
 	    
 	    form_information.submit();   // form1의 action값으로 input데이터를 이동
 	});
-	</script>
+</script>
 </body>
 </html>
