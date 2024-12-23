@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +17,7 @@ body {
   /* border: 1px solid #ccc; */
   border-radius: 20px;
   top: 0.2vh;
-  width: 99vw;
+  width: 99%;
   height: 99vh;
   background-color: #312726;
   display: flex;
@@ -27,7 +27,7 @@ body {
 
 .MainContent {
   border: 1px solid #ccc;
-  width: 62vw;
+  width: 70%;
   height: 750px;
   margin: 20px;
   border-radius: 20px;
@@ -39,24 +39,7 @@ body {
   flex-wrap: wrap;
   padding-top: 20px;
 }
-.Personal > #login_box {
-  border: 1px solid #ccc;
-  width: 50px;
-  height: 50px;
-  margin-top: 10px;
-  margin-left: 30px;
-  background-color: white;
-  border-radius: 50%;
-}
-.Personal > #message_box {
-    border: 1px solid #ccc;
-    width: 50px;
-    height: 50px;
-    margin-top: -50px;
-    margin-left: 90px;
-    background-color: white;
-    border-radius: 50%;
-  }
+
 .Announcement {
     border: 1px soild #ccc;
     width: 59vw;
@@ -65,14 +48,9 @@ body {
     border-radius: 10px;
     font-size: 30px;
     padding-left: 10px;
+    margin-right: 40px;
   }
-  .Personal {
-    position: fixed;
-    height: 70px;
-    width: 160px;
-    top: 0px;
-    right: 6px;
-  }
+
 
 .Accounts {
     
@@ -99,23 +77,25 @@ body {
   }
   .box3 {
     border: 1px solid red;
-    height: 400px;
     width: 30%;
+    margin-top: 50px;
   }
 #company {
 
   width: 200px;
   text-align: center;
+  margin-right: 80px;
 }
 #item {
   
   width: 200px;
-  text-align: center;
+  text-align: start;
+  margin-right: 40px;
 }
 #country {
   
   width: 130px;
-  text-align: center;
+  text-align: start;
 }
 #phone {
   
@@ -129,6 +109,7 @@ body {
   background-color: black;
   position: absolute;
   margin-left: 28px;
+  margin-top: 40px;
 }
 .line2 {
   border: 1px solid black;
@@ -136,8 +117,8 @@ body {
   height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 140px;
-  
+  margin-left: 135px;
+  margin-top: 50px;
 }
 .line3 {
   border: 1px solid black;
@@ -145,7 +126,8 @@ body {
   height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 270px;
+  margin-left: 275px;
+  margin-top: 50px;
   
 }
 .line4 {
@@ -154,28 +136,12 @@ body {
   height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 380px;
+  margin-left: 375px;
+  margin-top: 50px;
 }
-.Box2 {
-  border: 1px solid red;
-  width: 400px;
-  height: 50px;
-  margin-left: 350px;
-  display: flex;
-  align-items: center;
-}
-.search {
-  border: 1px solid black;
-  width: 80px;
-  height: 25px;
-  margin-left: 50px;
-}
-.box5 {
-  border: 1px solid black;
-  width: 180px;
-  height: 25px;
-  margin-left: 10px;
-}
+
+
+
 .btn1 {
   border: 1px solid black;
   width: 50px;
@@ -301,4 +267,104 @@ gap: 10px;
 
 #youtube {
 	color: #c4302b;
+}
+.databox {
+  height: 350px;
+  width: 100%;
+  display: flex;
+}
+.add-button {
+  background-color: #ffffff;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #312726;
+  margin-left: 460px;
+  margin-top: 7px;
+}
+/* 로그인 파트 */
+.Personal {
+  position: fixed;
+  height: 70px;
+  width: 160px;
+  top: 0px;
+  right: 6px;
+}
+
+.Personal > #Login_box {
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 30px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.Personal > #message_box {
+    width: 50px;
+    height: 50px;
+    margin-top: -50px;
+    margin-left: 90px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.Personal > #Logout_box {
+    width: 100px;
+    height: 0px;
+    margin-left: 50px;
+    border-radius: 10px;
+    background-color: #a8a8a8;
+    transition: 0.5s;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#Logout_box > a {
+	text-decoration: none;
+	color: white;
+}
+
+#Login_icon {
+	color: #a8a8a8;
+	font-size: 42px;
+	margin-top: 6px;
+}
+
+#Message_icon {
+	color: #a8a8a8;
+	font-size: 36px;
+}
+
+.message_amount {
+	border: 1px solid red;
+	background-color: red;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	border-radius: 50% 50%;
+	right: 5px;
+	top: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	font-size: 23px;
+	padding-bottom: 4px;
+}
+
+.message_count {
+	font-weight: bold;
 }

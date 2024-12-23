@@ -1,3 +1,6 @@
+@charset "UTF-8";
+
+
 
 * {
   margin: 0;
@@ -18,7 +21,6 @@ body {
   border-radius: 20px;
   top: 0.2vh;
   width: 99%;
-  height: 99vh;
   background-color: #312726;
   display: flex;
   justify-content: center;
@@ -35,28 +37,14 @@ body {
   opacity: 1;
   display: flex;
   flex-direction:column;
-  align-items:center ;
+  align-items:center;
   flex-wrap: wrap;
   padding-top: 20px;
+  top: 80px;
+  position: relative;
+  margin-bottom: 120px;
 }
-.Personal > #login_box {
-  border: 1px solid #ccc;
-  width: 50px;
-  height: 50px;
-  margin-top: 10px;
-  margin-left: 30px;
-  background-color: white;
-  border-radius: 50%;
-}
-.Personal > #message_box {
-    border: 1px solid #ccc;
-    width: 50px;
-    height: 50px;
-    margin-top: -50px;
-    margin-left: 90px;
-    background-color: white;
-    border-radius: 50%;
-  }
+
 .Announcement {
     border: 1px soild #ccc;
     width: 59vw;
@@ -65,14 +53,9 @@ body {
     border-radius: 10px;
     font-size: 30px;
     padding-left: 10px;
+    margin-right: 40px;
   }
-  .Personal {
-    position: fixed;
-    height: 70px;
-    width: 160px;
-    top: 0px;
-    right: 6px;
-  }
+ 
 
 .Accounts {
     
@@ -82,119 +65,87 @@ body {
   }
   .Account {
     color: black;
-    font-size: 17px;
+    font-size: 20px;
   }
+
+  
   .box1 {
     height: 150px;
-  
+    
   }
   .Box1 {
     display: flex;
+    width:80%;
   }
   .box2 {
     height: 400px;
-    width: 80%;
+    width: 70%;
   }
   .box3 {
     border: 1px solid red;
     width: 30%;
     margin-top: 50px;
   }
-#rawmaterials {
-  width: 150px;
-  text-align: center;
-}
-#company {
-  width: 150px;
-  text-align: center;
-}
-#country {
-  width: 130px;
-  text-align: center;
-}
-#Currentholding {
-  width: 150px;
-  text-align: start;
-}
-#importquantity {
-    width: 140px;
-    text-align: start;
+  #item {
+  width:100px;
+  text-align:center;
   }
+#deliveryquantity {
 
+  width: 200px;
+  text-align: center;
+}
+#defectivequantity {
+  
+  width: 200px;
+  text-align: start;
+margin-left: 5px;
+}
+#date {
+  width: 130px;
+  text-align: start;
+  margin-right: 25px;
+}
 .line1 {
   border: 1px solid black;
-  width: 550px;
+  width: 55%;
   height: 3px;
   background-color: black;
   position: absolute;
-  margin-left: 25px;
-  margin-top: 50px;
+  margin-right: 20px;
+  margin-top: 40px;
 }
 .line2 {
   border: 1px solid black;
   width: 1px;
-  height: 340px;
+  height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 115px;
-  margin-top: 60px;
+  margin-left: 80px;
+  margin-top: 50px;
 }
 .line3 {
   border: 1px solid black;
   width: 1px;
-  height: 340px;
+  height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 240px;
-  margin-top: 60px;
+  margin-left: 200px;
+  margin-top: 50px;
 }
 .line4 {
   border: 1px solid black;
   width: 1px;
-  height: 340px;
+  height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 337px;
-  margin-top: 60px;
+  margin-left: 320px;
+  margin-top: 50px;
 }
-.line5 {
-  border: 1px solid black;
-  width: 1px;
-  height: 340px;
-  background-color: black;
-  position: absolute;
-  margin-left: 450px;
-  margin-top: 60px;
-}
-.Box2 {
-  border: 1px solid red;
-  width: 400px;
-  height: 50px;
-  margin-left: 350px;
-  display: flex;
-  align-items: center;
-}
-.search {
-  border: 1px solid black;
-  width: 80px;
-  height: 25px;
-  margin-left: 50px;
-}
-.box5 {
-  border: 1px solid black;
-  width: 180px;
-  height: 25px;
-  margin-left: 10px;
-}
-.btn1 {
-  border: 1px solid black;
-  width: 50px;
-  height: 25px;
-  margin-left: 10px;
-  border-radius: 15%;
-  background-color: #312726;
-  color: white;
-}
+
+
+
+
 
 .MenuButton {
   position: fixed;
@@ -313,6 +264,7 @@ gap: 10px;
 	color: #c4302b;
 }
 .databox {
+
   height: 350px;
   width: 100%;
   display: flex;
@@ -324,6 +276,98 @@ gap: 10px;
   border-radius: 50%;
   font-size: 30px;
   color: #312726;
-  margin-left: 500px;
+  margin-left: 560px;
   margin-top: 7px;
+}
+
+.data {
+	color: black;
+}
+.btns {
+	display: flex;
+}
+/* 로그인 파트 */
+.Personal {
+  position: fixed;
+  height: 70px;
+  width: 160px;
+  top: 0px;
+  right: 6px;
+}
+
+.Personal > #Login_box {
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 30px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.Personal > #message_box {
+    width: 50px;
+    height: 50px;
+    margin-top: -50px;
+    margin-left: 90px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.Personal > #Logout_box {
+    width: 100px;
+    height: 0px;
+    margin-left: 50px;
+    border-radius: 10px;
+    background-color: #a8a8a8;
+    transition: 0.5s;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#Logout_box > a {
+	text-decoration: none;
+	color: white;
+}
+
+#Login_icon {
+	color: #a8a8a8;
+	font-size: 42px;
+	margin-top: 6px;
+}
+
+#Message_icon {
+	color: #a8a8a8;
+	font-size: 36px;
+}
+
+.message_amount {
+	border: 1px solid red;
+	background-color: red;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	border-radius: 50% 50%;
+	right: 5px;
+	top: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	font-size: 23px;
+	padding-bottom: 4px;
+}
+
+.message_count {
+	font-weight: bold;
 }

@@ -8,15 +8,16 @@
 <%@ page import="DBConnection.DBManager" %>
 <%@ page import="Link.Link" %>
 <%
+	request.setCharacterEncoding("UTF-8");
+
 	String user_id = request.getParameter("user_id");
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
 	
-	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
-	
-	String sql = "SELECT c.dept_id " +
+
+	String sql = "SELECT b.emp_id, c.dept_id " +
 				 "FROM USERS a, EMPLOYEES b, DEPT_EMP c " +
 				 "WHERE a.user_id=b.user_id AND b.emp_id=c.emp_id " +
 				 "AND a.user_id = ?";
@@ -27,13 +28,13 @@
 		
 		ResultSet rs = pstmt.executeQuery();
 		rs.next();
-		
+		emp_id = rs.getString("emp_id");
 		department_id = rs.getString("dept_id");
 		
 		DBManager.dbClose(conn, pstmt, rs);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,42 +42,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./css/Correspondent_Product.css">
+  <link rel="stylesheet" href="./css/Quality_Control.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
 </head>
 <body>
-  <div class="fullScreen">
+<div class="fullScreen">
     <div class="MainContent">
       <div class="box1">
         <div class="Announcement">
-          납품 거래처 관리
+          품질 관리
           <button class="add-button">+</button>
         </div>
       </div>
     <div class="Box1">
       <div class="box2">
         <div class="Accounts">
-          <div class="Account" id="company">&nbsp;&nbsp;&nbsp;&nbsp;거래처명</div>
-          <div class="Account" id="item">&nbsp;&nbsp;&nbsp;주소</div>
- 
-          <div class="Account" id="phone">Tel</div>
+         <div class="Account" id="item">제품</div>
+          <div class="Account" id="deliveryquantity">생산량</div>
+          <div class="Account" id="defectivequantity">불량품</div>
+          <div class="Account" id="date">날짜</div>
         </div>
         <div class="databox">
           <ul class="data">
-             <%
-            conn = DBManager.getDBConnection();
-             sql = "SELECT cor_name, cor_tel, cor_address " + 
-            "FROM correspondent_product " ;
-            try {
+<% 
+			 conn = DBManager.getDBConnection();
+
+			 sql = "SELECT b.product_name, a.production, a.defective, a.reporting_date " +
+						 "FROM HISTORY a, PRODUCTS b " +
+						 "WHERE a.product_id=b.product_id";
+			
+			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
 				ResultSet rs = pstmt.executeQuery();
 				
 				while(rs.next()){
 %>
-			<li>
-			<span><%= rs.getString("cor_name") %></span><span><%= rs.getString("cor_tel")%></span><span><%= rs.getString("cor_address")%></span>
+            <li>
+            	<span><%= rs.getString("product_name") %></span><span><%= rs.getInt("production")%></span><span><%= rs.getInt("defective")%></span><span><%= rs.getString("reporting_date")%></span>
             </li>
 <%
 				}
@@ -87,15 +91,19 @@
 %>
           </ul>
         </div>
-
       </div>
+
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+      <div class="line4"></div>
       <div class="box3">
         <ul class="buttons">
-    <% 
+        <% 
     	 conn = DBManager.getDBConnection();
         
-         sql = "SELECT cor_name " + 
-         	   "FROM correspondent_product";
+         sql = "SELECT product_hist_num " + 
+         	   "FROM HISTORY";
         
 	
 	try {
@@ -106,8 +114,8 @@
 		while(rs.next()){
         %>
 		<li class= "btns">
-			<button class="modify" cor_name="<%= rs.getString("cor_name")%>">수정</button>
-			<button class="delete" cor_name="<%= rs.getString("cor_name")%>">삭제</button>
+			<button class="modify" hist_num="<%= rs.getString("product_hist_num")%>">수정</button>
+			<button class="delete" hist_num="<%= rs.getString("product_hist_num")%>">삭제</button>
 		</li>
 		<% 
 		}
@@ -118,16 +126,13 @@
 		%>
         </ul>
       </div>
-      <div class="line1"></div>
-      <div class="line2"></div>
-      <div class="line4"></div>
     </div>
-
     </div>
     </div>
   </div>
 
- <!-- 메뉴 바 -->
+
+  <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
       <div class="menuButtonBar"></div>
@@ -182,7 +187,7 @@
         </div>	
     </div>
 <!-- 여기까지 -->
-    <!-- 로그인 창 -->
+<!-- 로그인 창 -->
 <%
 	conn = DBManager.getDBConnection();
 
@@ -214,11 +219,9 @@
       <div id="Logout_box"><a href='./Main.jsp'>로그아웃</a></div>
     </div>
 <!-- 여기까지 -->
-    
 
-  
   </div>
-   <script>
+  	  <script>
 // ------------ 메뉴박스 --------------------
   	let user_id = "<%= user_id %>";
     let MenuButton = document.querySelector(".MenuButton");
@@ -281,7 +284,7 @@
     	Workmenu.style.opacity = 0.7;
     	Workmenu.style.left = '0.5vw';
     	MainContent.style.opacity = 0.3;
-    
+    	
     });
 
     document.addEventListener ('click', function(event) {
@@ -290,7 +293,7 @@
 	        Workmenu.style.left = '-400px';
 	        MenuButton.style.opacity = 1;
 	        MainContent.style.opacity = 1;
-	       
+	        
       }
     });
     
@@ -315,7 +318,11 @@
 		}
     }
     
-
+    let addbutton = document.querySelector('.add-button');
+    
+    addbutton.addEventListener('click', function() {
+		location.href = 'Quality_Control_add.jsp';
+	});
   </script>
 </body>
 </html>

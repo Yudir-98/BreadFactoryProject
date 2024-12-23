@@ -23,29 +23,38 @@
 </head>
 <body>
   <div class="fullScreen">
-    <div class="Workmenu"></div>
     <div class="MainContent">
       <div class="box1">
         <div class="Announcement">
           생산현황 관리
+          <button class="add-button">+</button>
         </div>
       </div>
     <div class="Box1">
       <div class="box2">
         <div class="Accounts">
-          <div class="Account" id="company">제품</div>
-          <div class="Account" id="item">거래처명</div>
-          <div class="Account" id="country">현재 생산량</div>
-          <div class="Account" id="phone">예상 생산량</div>
+          <div class="Account" id="item">제품</div>
+          <div class="Account" id="company">거래처명</div>
+          <div class="Account" id="Currentproduction">현재 생산량</div>
+          <div class="Account" id="Expectedproduction">예상 생산량</div>
         </div>
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-        <div class="line4"></div>
+        <div class="databox">
+          <ul class="data">
+            
+          </ul>
+        </div>
+
       </div>
       <div class="box3">
-        
+        <ul class="buttons">
+
+        </ul>
       </div>
+      
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+      <div class="line4"></div>
     </div>
     <div class="Box2">
         <select class="search">
