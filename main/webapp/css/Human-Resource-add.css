@@ -34,6 +34,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   padding-top: 20px;
+  margin-bottom: 12%;
 }
 .MainContent > .Announcement {
   border: 1px soild #ccc;

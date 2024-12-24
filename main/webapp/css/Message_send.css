@@ -19,179 +19,21 @@ body {
   background-color: #312726;
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: center;
 }
-
 .MainContent {
   border: 1px solid #ccc;
-  width: 62vw;
+  width: 65%;
   margin: 20px;
   border-radius: 20px;
   background-color: white;
   opacity: 1;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   padding-top: 20px;
   margin-top: 200px;
-}
-
-.MainContent > .Announcement {
-	border: 1px soild #ccc;
-	width: 59vw;
-	height: 50px;
-	background-color: #312726;
-	border-radius: 10px;
-	padding-left: 2%;
-	font-size: 25px;
-	padding-top: 2%;
-	position: relative;
-}
-
-
-.Accounts {
-    height: 50px;
-    display: flex;
-  }
-  
-.Account {
-  color: black;
-  font-size: 95%;
-  align-content: center;
-  padding-bottom: 6px;
-}
-
- .Box1 {
-   display: flex;
-   width: 100%;
- }
- 
- .box2 {
-   width: 70%;
-   position:relative;
- }
- 
- .content {
- 	width: 100%;
- 	
- }
- 
- .box3 {
-   border: 1px solid red;
-   width: 30%;
-   margin-top: 50px;
-  }
-  
-#company {
-  width: 25%;
-  text-align: center;
-}
-
-#item {
-  width: 15%;
-  text-align: center;
-}
-
-#country {
-  width: 25%;
-  text-align: center;
-}
-
-#phone {
-  width: 35%;
-  text-align: center;
-}
-.line1 {
-  border: 1px solid black;
-  width: 92%;
-  height: 3px;
-  background-color: black;
-  position: absolute;
-  margin-left: 7%;
-}
-
-.line2 {
-  border: 1px solid black;
-  width: 1px;
-  height: 80%;
-  background-color: black;
-  position: absolute;
-  margin-left: 25%;
-  margin-top: 10px;
-}
-.line3 {
-  border: 1px solid black;
-  width: 1px;
-  height: 80%;
-  background-color: black;
-  position: absolute;
-  margin-left: 40%;
-  margin-top: 10px;
-  
-}
-.line4 {
-  border: 1px solid black;
-  width: 1px;
-  height: 80%;
-  background-color: black;
-  position: absolute;
-  margin-left: 65%;
-  margin-top: 10px;
-}
-
-.line5 {
-	opacity: 0;
-	height: 520px;
-	position:relative;
-	width: 0px;
-}
-
-.Box2 {
-	display: flex;
-	margin-left: 20%;
-	margin-bottom: 10px;
-}
-
-
-.btn1 {
-  border: 1px solid black;
-  width: 50px;
-  height: 25px;
-  margin-left: 10px;
-  border-radius: 15%;
-  background-color: #312726;
-  color: white;
-}
-
-.update-button{
-	background-color:#312726;
-	color : white;
-	border-radius: 10px;
-	width:80px;
-	height:25px;
-}
-.delete-button{
-	background-color:#312726;
-	color : white;
-	border-radius: 10px;
-	width:80px;
-	height:25px;
-}
-
-.add-button{
-  position: absolute;
-  background-color: #ffffff;
-  top: 14%;
-  right: 3%;
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
-  font-size: 30px;
-  color: #312726;
-}
-
-.add-button:hover{
-  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 로그인 파트 */
@@ -397,4 +239,53 @@ gap: 10px;
 
 #youtube {
 	color: #c4302b;
+}
+
+.MainContent > .Announcement {
+  border: 1px soild #ccc;
+  width: 91%;
+  height: 50px;
+  background-color:#312726;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.content{
+  border: 1px solid black;
+  width: 59vw;
+  height: 600px;
+}
+
+#form_information {
+	display: flex;
+	flex-direction: column;
+	height: 80%;
+	color: black;
+}
+
+.destination_input {
+	width: 45%;
+	margin-left:5%;
+}
+
+
+.message_input {
+	height: 81%;
+    width: 90%;
+    margin-left: 5%;
+}
+.buttons {
+	height: 20px;
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 6%;
+	gap: 2%;
+}
+
+button {
+	background-color:#312726;
+	color : white;
+	border-radius: 10px;
+	width:80px;
+	height:25px;
 }

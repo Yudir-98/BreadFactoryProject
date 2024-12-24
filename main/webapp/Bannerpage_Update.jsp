@@ -23,6 +23,7 @@
 </head>
 <body>
   <div class="fullScreen">
+    <div class="Workmenu"></div>
     <div class="MainContent">
       <div class="box1">
         <div class="Announcement">
@@ -80,11 +81,11 @@
       <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
-	    <div class="menuButtonBar"></div>
-	    <div class="menuButtonBar"></div>
-	    <div class="menuButtonBar"></div>
-  	</div>
-	<div class="Workmenu">
+    <div class="menuButtonBar"></div>
+    <div class="menuButtonBar"></div>
+    <div class="menuButtonBar"></div>
+  </div>
+<div class="Workmenu">
       <div class="WelcomeFont">환영합니다!</div>
       <div class="division_line"></div>
       <span class="WorksBox_Tag">- Works</span>
@@ -131,67 +132,13 @@
         </ul>
       </div>	
   </div>
+    
+<!-- 시계 --> 
+  <div class="DateTime">
+    <div id="year"></div>
+    <div id="clock"></div>
   </div>
-  <script>
-	let user_id = "<%= user_id %>";
-    let MenuButton = document.querySelector(".MenuButton");
-    let Workmenu = document.querySelector(".Workmenu");
-    let MainContent = document.querySelector(".MainContent");
-    let menu_WorksBox = document.querySelector(".menu_WorksBox");
-    let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
-    
-    if(user_id == "null") {
-   		messageBox.style.opacity = 0;
-   		messageBox.disabled = true;
-   		LoginBox.addEventListener('click', function() {
-   			location.href='./LoginPage.jsp';
-   		});
-   	} else {
-   		messageBox.style.opacity = 1;
-   		LoginBox.addEventListener('click', function() {
-   			LogoutBox.disabled = false;
-   			LogoutBox_opend = true;
-   			Logout_open();
-   		});
-   	}
-
-    MenuButton.addEventListener ('click', function() {
-    	MenuButton.style.opacity = 0;
-    	Workmenu.style.opacity = 0.7;
-    	Workmenu.style.left = '0.5vw';
-    	MainContent.style.opacity = 0.3;
-    	DateTime.style.opacity = 0.1;
-    });
-
-    document.addEventListener ('click', function(event) {
-    	if (!Workmenu.contains(event.target) && !MenuButton.contains(event.target)) {
-	        Workmenu.style.opacity = 0.0;
-	        Workmenu.style.left = '-400px';
-	        MenuButton.style.opacity = 1;
-	        MainContent.style.opacity = 1;
-	        DateTime.style.opacity = 1;
-      }
-    });
-    
-    WorksBox_Tag.addEventListener ('click', function() {
-    	WorkBox_open();
-    });
-    
-    function WorkBox_open() {
-    	if(menu_WorksBox.style.height == '0px') {
-    		menu_WorksBox.style.height = 'auto';
-    	} else {
-    		menu_WorksBox.style.height = '0px';
-    	}
-    }
-    
-    function Logout_open() {
-    	if(LogoutBox.style.height == '0px') {
-			LogoutBox.style.height = '50px';
-		} else {
-			LogoutBox.style.height = '0px';
-		}
-    }
-    </script>
+  
+  </div>
 </body>
 </html>

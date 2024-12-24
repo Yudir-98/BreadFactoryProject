@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 * {
   margin: 0;
@@ -17,7 +18,7 @@ body {
   /* border: 1px solid #ccc; */
   border-radius: 20px;
   top: 0.2vh;
-  width: 99%;
+  width: 99vw;
   height: 99vh;
   background-color: #312726;
   display: flex;
@@ -27,7 +28,7 @@ body {
 
 .MainContent {
   border: 1px solid #ccc;
-  width: 70%;
+  width: 62vw;
   height: 750px;
   margin: 20px;
   border-radius: 20px;
@@ -38,7 +39,6 @@ body {
   align-items:center ;
   flex-wrap: wrap;
   padding-top: 20px;
-
 }
 .Personal > #login_box {
   border: 1px solid #ccc;
@@ -75,24 +75,22 @@ body {
     top: 0px;
     right: 6px;
   }
-
+ 
 .Accounts {
+    
     height: 50px;
-    position: relative;
-    bottom: 10px;
+    top: 20px;
     display: flex;
   }
   .Account {
     color: black;
-    font-size: 20px;
+    font-size: 17px;
   }
   .box1 {
     height: 150px;
-    margin-left: 20px;
   }
   .Box1 {
     display: flex;
-    width: 80%;
   }
   .box2 {
     height: 400px;
@@ -100,71 +98,58 @@ body {
   }
   .box3 {
     border: 1px solid red;
+    height: 400px;
     width: 30%;
-    margin-top: 50px;
   }
-#item {
-  width: 200px;
-  text-align: center;
-  position: relative;
-  top: 10px;
-}
 #company {
   width: 200px;
+  text-align: center;
+}
+#item {
+  width: 200px;
   text-align: start;
-  margin-left: 10px;
-  position: relative;
-  top: 10px;
+  margin-left: 20px;
   
 }
-#Currentproduction {
-  width: 215px;
+#country {
+  width: 130px;
   text-align: center;
-  position: relative;
-  top: 10px;
-  margin-right: 5px;
 }
-#Expectedproduction  {
-  width: 225px;
+#phone {
+  width: 300px;
   text-align: center;
-  position: relative;
-  top: 10px;
 }
 .line1 {
   border: 1px solid black;
-  width: 470px;
+  width: 550px;
   height: 3px;
   background-color: black;
   position: absolute;
-  margin-left: 20px;
-  margin-top: 50px;
+  margin-left: 28px;
 }
 .line2 {
   border: 1px solid black;
   width: 1px;
-  height: 340px;
+  height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 100px;
-  margin-top: 60px;
+  margin-left: 130px;
 }
 .line3 {
   border: 1px solid black;
   width: 1px;
-  height: 340px;
+  height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 225px;
-  margin-top: 60px;
+  margin-left: 265px;
 }
 .line4 {
   border: 1px solid black;
   width: 1px;
-  height: 340px;
+  height: 350px;
   background-color: black;
   position: absolute;
-  margin-left: 365px;
-  margin-top: 60px;
+  margin-left: 415px;
 }
 .Box2 {
   border: 1px solid red;
@@ -311,19 +296,4 @@ gap: 10px;
 
 #youtube {
 	color: #c4302b;
-}
-.databox {
-  height: 350px;
-  width: 100%;
-  display: flex;
-}
-.add-button {
-  background-color: #ffffff;
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
-  font-size: 30px;
-  color: #312726;
-  margin-left: 500px;
-  margin-top: 7px;
 }

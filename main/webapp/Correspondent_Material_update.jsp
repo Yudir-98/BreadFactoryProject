@@ -12,6 +12,7 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String update_form_link = "./Correspondent_Material_update_form.jsp?user_id=" + user_id;
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -35,121 +36,66 @@
 			e.printStackTrace();
 		}
 %>
+<%
+
+	conn = DBManager.getDBConnection();
+	
+	String cor_name = request.getParameter("cor_name");
+
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./css/Correspondent_Material.css">
+<meta charset="EUC-KR">
+<title>인사 관리 수정 페이지</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="./css/Human-Resource-update.css">
 </head>
 <body>
-  <div class="fullScreen">
-    <div class="MainContent">
-    <div class="Announcement">
-		거래처 관리
-		<button class="add-button">+</button>
-    </div>
-    
-    <div class="Box1">
-      <div class="box2">
-        <div class="Accounts">
-          <div class="Account" id="company">거래처명</div>
-          <div class="Account" id="item">거래 품목</div>
-          <div class="Account" id="country">원산지</div>
-          <div class="Account" id="phone">Tel</div>
-        </div>
-        <div class="content"> 
-       <ul class="content_list">
-       
-       <%
-		//java로 sql실행하여 데이터 삽입하기
-		 conn = DBManager.getDBConnection();
+	<div class="fullScreen">
+		<div class="MainContent">
+			<div class="Announcement">
+				<h1>&nbsp;수 정</h1>
+			</div>
+      <div class="content">
+<% 
+		String material = "";
+		String origin = "";
+		String cor_tel = "";
+
+		conn = DBManager.getDBConnection();
 		
-		sql = "SELECT cor_name, material, origin, cor_tel " +
-					 "FROM correspondent_material ";
-		
-		try {
+		sql = "SELECT material, origin, cor_tel " +
+			  "FROM correspondent_material " +
+			  "WHERE cor_name = ?";
+		try{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cor_name);
 			
 			ResultSet rs = pstmt.executeQuery();
-			
-			
-			while(rs.next()) {
-				String cor_name = rs.getString("cor_name");
-				String material = rs.getString("material");
-				String origin = rs.getString("origin");
-				String cor_tel = rs.getString("cor_tel");
-%>
-		<li class="contents">
-			<div class="content" id="cor_name"><%= cor_name %></div>
-			<div class="content" id="material"><%= material %></div>
-			<div class="content" id="origin"><%= origin %></div>
-			<div class="content" id="cor_tel"><%= cor_tel %></div>
-		</li>
-<%
-			}
+			rs.next();
 			
 			DBManager.dbClose(conn, pstmt, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 %>
-       </ul>
+		<form id="form_information" action="<%= update_form_link %>" method="POST">
+		        거래처명 &nbsp;&nbsp;&nbsp;: <input type="text" name="cor_name" value="<%= cor_name%>" placeholder="거래처명을 입력해주세요.">
+		        <br>
+		        거래 품목 &nbsp;&nbsp;&nbsp;: <input type="text" name="material" value="<%= material%>" placeholder="거래품목을 입력해주세요" >
+		        <br>
+		        원산지 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="origin" value="<%= origin%>" placeholder="원산지를 입력해주세요" >
+		        <br>
+		        Tel &nbsp;: <input type="text" name="cor_tel" value="<%= cor_tel%>" placeholder="거래처 번호를 입력해주세요" >
+	         </form>
+	        <div class="buttons">
+	        <button class="update-button">수 정</button>
+	        <button class="cancel-button">취 소</button>
+       
         </div>
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-        <div class="line4"></div>
-        <div class="line5"></div>
       </div>
-      <div class="box3">
-      	<ul class="remake">
-<%
-		//java로 sql실행하여 데이터 삽입하기
-		conn = DBManager.getDBConnection();
-		
-		sql = "SELECT cor_name " +
-					 "FROM correspondent_material ";
-		
-		try{
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			
-			ResultSet rs = pstmt.executeQuery();
-		 while(rs.next()){
-%>
-	<li>
-		<button class="update-button" cor_name="<%= rs.getInt("cor_name") %>">수정</button>
-		<button class="delete-button" cor_name="<%= rs.getInt("cor_name") %>">삭제</button>
-	</li>
-<%
-		 }
-		DBManager.dbClose(conn, pstmt, rs);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-%>
-      	</ul>
-      </div>
-    </div>	
-    
-    
-    <div class="Box2">
-        <select class="search">
-          <option value="search1" selected>거래처명</option>
-          <option value="search1" >거래 품목</option>
-          <option value="search1" >원산지</option>
-          <option value="search1" >Tel</option>
-        </select>
-        <input class="box5"></input>
-        <button class="btn1">검색</button>
-      </div>
-    </div>
-    </div>
-  </div>
-
-<!-- 메뉴 바 -->
+		 <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
       <div class="menuButtonBar"></div>
@@ -237,23 +183,23 @@
       <div id="Logout_box"><a href='./Main.jsp'>로그아웃</a></div>
     </div>
 <!-- 여기까지 -->
-
-<script>
-//------------ 메뉴박스 --------------------
+	</div>
+	<script>
+	//------------ 메뉴박스 --------------------
 	let user_id = "<%= user_id %>";
 		let MenuButton = document.querySelector(".MenuButton");
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
-	
-//------------ Personal 박스 --------------------
+
+	//------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
 	let LoginBox = document.querySelector("#Login_box");
 	let LogoutBox = document.querySelector("#Logout_box");
 	let MainContent = document.querySelector(".MainContent");
 	let LogoutBox_opend = false;
 	
- 	 // ------------ Personal 박스 --------------------
+	 // ------------ Personal 박스 --------------------
    	if(user_id == "null") {
    		messageBox.style.opacity = 0;
    		messageBox.disabled = true;
@@ -309,38 +255,22 @@
 		} else {
 			LogoutBox.style.height = '0px';
 		}
-    }
- 
-  //add-button 누르면 인원 추가
-  	let addbutton = document.querySelector('.add-button');
-  	
-  	addbutton.addEventListener('click', function(){
-  		location.href = './Correspondent_Material_add.jsp?user_id=' + '<%= user_id %>';
-  	});
-  	
-  	// 수정 버튼 누르면 수정
-  	let updatebutton = document.querySelectorAll(".update-button");
-
-  	for(let i = 0; i < updatebutton.length; i++) {
-  		updatebutton[i].addEventListener('click', function(){
-  	  		const emp_id = updatebutton[i].getAttribute("emp-id");
-  	  		location.href = './Correspondent_Material_update.jsp?user_id=' + '<%= user_id %>';
-  	  	});
-  	}
-  	
-  	// 삭제 버튼 누르면 
-	let deletebutton = document.querySelectorAll(".delete-button");
-
-  	for(let i = 0; i < deletebutton.length; i++) {
-  		deletebutton[i].addEventListener('click', function(){
-  	  		const emp_id = deletebutton[i].getAttribute("emp-id");
-  	  		if(confirm('삭제하시겠습니까?')){
-  	  		location.href = './Correspondent_Material_delete.jsp?user_id=' + '<%= user_id %>';
-  	  		}
-  	  		
-  	  	});
-  	}
-</script>
-
+    }  	
+	//취소 버튼 눌렀을 때
+	let cancelbutton = document.querySelector('.cancel-button');
+	
+	cancelbutton.addEventListener('click', function(){
+		location.href = './Human_Resource.jsp?user_id=' + '<%= user_id%>';
+	});
+	//수정 버튼 눌렀을 때
+	let updatebutton = document.querySelector('.update-button');
+	const form_information = document.getElementById('form_information');
+	
+	updatebutton.addEventListener('click', function(){
+		event.preventDefault();  // 기본 동작을 막음
+	    
+	    form_information.submit();   // form1의 action값으로 input데이터를 이동
+	});
+	</script>
 </body>
 </html>

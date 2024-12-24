@@ -14,6 +14,7 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String today_work_add_link = "./Main_Today_Work_add.jsp?user_id=" + user_id;
 	
 	Connection conn = DBManager.getDBConnection();
 
@@ -126,13 +127,66 @@
       
     <!-- 메인 콘텐츠 박스 1 -->
       <div class="Main_ContentBox1">
-        <div class="TodayWork"></div>
+        <div class="TodayWork">
+        	<h1 class="today_work_title">오늘의할일</h1>
+        	<button class="today_work_add_button">+</button>
+        	<div class="today_work_add_box">
+        		<form id="today_work_information" action="<%= today_work_add_link %>" method="POST">
+        			<input type="text" id="today_work" name="today_work" placeholder="해야할 일을 작성하세요.">
+        		</form>
+        		<button class="today_work_add_accept">추가</button>
+        	</div>
+        	<ul class="today_work_list">
+<%
+			conn = DBManager.getDBConnection();
+			
+			sql ="SELECT work, work_num " + 
+				 "FROM today_work " +
+				 "WHERE emp_id = ?";
+			
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, emp_id);
+				
+				ResultSet rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					String work_num = rs.getString("work_num");
+%>
+			<li class="today_work_li"><span class="today_work_check" work_num="<%= work_num %>">&check;</span><%= rs.getString("work") %></li>
+<% 
+				}
+				
+				DBManager.dbClose(conn, pstmt, rs);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+%>
+        	</ul>
+        </div>
       </div>
       
     <!-- 메인 콘텐츠 박스 2 -->
       <div class="Main_ContentBox2">
-        <div class="SecBox1"></div>
-        <div class="SecBox2"></div>
+      <!-- 캘린더 -->
+        <div class="SecBox1">
+        	<div class="calendar">
+		        <div class="week" id="week">
+		            <!-- 일요일부터 토요일까지 미리 만든 div 요소들 -->
+		            <div class="day" id="sun"><h4>일</h4><p></p></div>
+		            <div class="day" id="mon"><h4>월</h4><p></p></div>
+		            <div class="day" id="tue"><h4>화</h4><p></p></div>
+		            <div class="day" id="wed"><h4>수</h4><p></p></div>
+		            <div class="day" id="thu"><h4>목</h4><p></p></div>
+		            <div class="day" id="fri"><h4>금</h4><p></p></div>
+		            <div class="day" id="sat"><h4>토</h4><p></p></div>
+		        </div>
+		    </div>
+        </div>
+        <!-- 사내 게시판 -->
+        <div class="SecBox2">
+        
+        </div>
       </div>
     </div>
 	
@@ -173,6 +227,27 @@
     
   </div>
   <script>
+  
+//------------ MainContent 박스 --------------------
+	let Announcement = document.querySelector(".Announcement");
+	let Notice1 = document.getElementById("notice1");
+	let Notice2 = document.getElementById("notice2");
+	let Notice3 = document.getElementById("notice3");
+	let Today_Work_add_Button = document.querySelector(".today_work_add_button");
+	let Today_Work_add_Box = document.querySelector(".today_work_add_box");
+	let Today_Work_add_Accept = document.querySelector(".today_work_add_accept");
+	let Today_Work_check = document.querySelectorAll('.today_work_check');
+	let today = new Date();
+	let daysOfWeek = {
+            sun: document.getElementById('sun'),
+            mon: document.getElementById('mon'),
+            tue: document.getElementById('tue'),
+            wed: document.getElementById('wed'),
+            thu: document.getElementById('thu'),
+            fri: document.getElementById('fri'),
+            sat: document.getElementById('sat')
+        };
+
 // ------------ 메뉴박스 --------------------
   	let user_id = "<%= user_id %>";
     let MenuButton = document.querySelector(".MenuButton");
@@ -192,6 +267,7 @@
     let LogoutBox = document.querySelector("#Logout_box");
     let MainContent = document.querySelector(".MainContent");
     let LogoutBox_opend = false;
+    
 
 <%
 	conn = DBManager.getDBConnection();
@@ -210,10 +286,124 @@
 	}
 %>
 
-    
 
-    
- // ------------ Personal 박스 --------------------
+//------------ MainContent 박스 -------------------
+	document.addEventListener('DOMContentLoaded', function() {
+		//----------- 공지 사항 ----------
+		Announcement.style.background = "url('./img/imge1.jpg') no-repeat center center";
+		Announcement.style.bakcgroundSize = "cover";
+		
+		//----------- MainContentBox1 -------------
+		Today_Work_add_Box.disabled = true;
+		Today_Work_add_Box.style.width = '0px';
+		Today_Work_add_Box.style.height = '0px';
+		Today_Work_add_Box.style.opacity = 0;
+	});
+	
+	//----------- 공지 사항 ----------
+	Notice1.addEventListener('click', function() {
+		Announcement.style.background = "url('./img/imge1.jpg') no-repeat center center";
+		Announcement.style.bakcgroundSize = "cover";
+	});
+	
+	Notice2.addEventListener('click', function() {
+		Announcement.style.background = "url('./img/imge2.jpg') no-repeat center center";
+		Announcement.style.bakcgroundSize = "cover";
+	});
+	
+	Notice3.addEventListener('click', function() {
+		Announcement.style.background = "url('./img/imge3.jpg') no-repeat center center";
+		Announcement.style.bakcgroundSize = "cover";
+	});
+	
+	//----------- MainContentBox1 ----------
+	Today_Work_add_Button.addEventListener('click', function() {
+		today_work_add_open();
+	});
+	
+	Today_Work_add_Accept.addEventListener('click', function() {
+		event.preventDefault();
+		    
+	    today_work_information.submit();
+	});
+	for(let i = 0; i < Today_Work_check.length; i++) {
+		Today_Work_check[i].addEventListener('click', function() {
+			
+			location.href = './Main_Today_Work_delete.jsp?work_num=' + 
+							this.getAttribute("work_num") +
+							'&user_id=' +
+							'<%= user_id %>';
+		});
+	}
+	
+	//----------- MainContentBox2 ----------
+	// 일주일 날짜 설정 및 렌더링
+    function renderWeek() {
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - today.getDay()); // 이번 주 일요일 기준
+
+        for (let i = 0; i < 7; i++) {
+            const currentDate = new Date(startOfWeek);
+            currentDate.setDate(startOfWeek.getDate() + i);
+
+            const year = currentDate.getFullYear();
+            let month = currentDate.getMonth() + 1;
+            if (month < 10) {
+                month = "0" + month;
+            };
+            const day = currentDate.getDate();
+            if (day < 10) {
+                day = "0" + day;
+            };
+            const dateString = year + '-' + month + '-' + day; // "YYYY-MM-DD"
+
+            // 오늘 날짜
+            const todayYear = today.getFullYear();
+            const todayMonth = today.getMonth();
+            const todayDate = today.getDate();
+
+            // 비교 날짜
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth();
+            const currentDateValue = currentDate.getDate();
+
+            // 해당 요일에 날짜 설정
+            let dayId;
+            switch (i) {
+                case 0:
+                    dayId = "sun";
+                    break;
+                case 1:
+                    dayId = "mon";
+                    break;
+                case 2:
+                    dayId = "tue";
+                    break;
+                case 3:
+                    dayId = "wed";
+                    break;
+                case 4:
+                    dayId = "thu";
+                    break;
+                case 5:
+                    dayId = "fri";
+                    break;
+                case 6:
+                    dayId = "sat";
+                    break;
+            }
+
+            const dayDiv = document.getElementById(dayId);
+            const dayDate = dayDiv.querySelector("p");
+            dayDate.textContent = dateString;
+
+            // 클릭 이벤트 추가
+            dayDiv.addEventListener("click", function () {
+                console.log(dateString); // 클릭된 날짜를 콘솔에 출력
+            });
+        }
+    }
+// ------------ Personal 박스 --------------------
    	if(user_id == "null") {
    		messageBox.style.opacity = 0;
    		messageBox.disabled = true;
@@ -256,6 +446,23 @@
     	WorkBox_open();
     });
     
+ // ------------ MainContent1 함수 --------------------
+    function today_work_add_open() {
+    	if(Today_Work_add_Box.disabled){
+    		Today_Work_add_Box.disabled = false;
+    		Today_Work_add_Box.style.width = '240px';
+    		Today_Work_add_Box.style.height = '50px';
+    		Today_Work_add_Box.style.opacity = 1;
+    	} else {
+    		Today_Work_add_Box.disabled = true;
+    		Today_Work_add_Box.style.width = '0px';
+    		Today_Work_add_Box.style.height = '0px';
+    		Today_Work_add_Box.style.opacity = 0;
+    	}
+    }
+ 
+ 
+ // ------------ 메뉴 함수 --------------------
     function WorkBox_open() {
     	if(menu_WorksBox.style.height == '0px') {
     		menu_WorksBox.style.height = 'auto';
@@ -279,7 +486,7 @@
     	let hours = now.getHours().toString().padStart(2, '0');
     	let minutes = now.getMinutes().toString().padStart(2, '0');
     	let year = now.getFullYear();
-    	let month = now.getMonth();
+    	let month = now.getMonth() + 1;
     	let day = now.getDate();
     	
     	let yearString = year + '-' + month + '-' + day;

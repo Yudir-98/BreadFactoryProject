@@ -22,40 +22,32 @@
   <link rel="stylesheet" href="./css/Material_Status.css">
 </head>
 <body>
-<div class="fullScreen">
+  <div class="fullScreen">
+    <div class="Workmenu"></div>
     <div class="MainContent">
       <div class="box1">
         <div class="Announcement">
           자재현황 관리
-          <button class="add-button">+</button>
         </div>
       </div>
     <div class="Box1">
       <div class="box2">
         <div class="Accounts">
-          <div class="Account" id="rawmaterials">원자재</div>
-          <div class="Account" id="company">거래처명</div>
+          <div class="Account" id="company">원자재</div>
+          <div class="Account" id="item">거래처명</div>
           <div class="Account" id="country">원산지</div>
-          <div class="Account" id="Currentholding">&nbsp;현재 보유량</div>
-          <div class="Account" id="importquantity">&nbsp;&nbsp;&nbsp;수입량</div>
+          <div class="Account" id="phone">현재 보유량</div>
+          <div class="Account" id="comecheck">수입량</div>
         </div>
-        <div class="databox">
-          <ul class="data">
-            
-          </ul>
-        </div>
-
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+        <div class="line4"></div>
+        <div class="line5"></div>
       </div>
       <div class="box3">
-        <ul class="buttons">
-
-        </ul>
+        
       </div>
-      <div class="line1"></div>
-      <div class="line2"></div>
-      <div class="line3"></div>
-      <div class="line4"></div>
-      <div class="line5"></div>
     </div>
     <div class="Box2">
         <select class="search">
