@@ -58,7 +58,7 @@
 <meta charset="EUC-KR">
 <title>인사 관리 수정 페이지</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="./css/Bannerpage-update.css">
+<link rel="stylesheet" href="./css/Board-update.css">
 </head>
 <body>
 	<div class="fullScreen">
@@ -96,7 +96,7 @@
 			e.printStackTrace();
 		}
 %>
-		<form id="form_information" action="./Bannerpage_update_form.jsp" method="POST">
+		<form id="form_information" action="./Board_update_form.jsp" method="POST">
 	        사원 번호 &nbsp;&nbsp;&nbsp;: <input type="text" value="<%= emp_id %>" name="emp_id" required>
 	        <br>
 	        사원 이름 &nbsp;&nbsp;&nbsp;: <input type="text" value="<%= emp_name %>" name="emp_name" required>
@@ -290,7 +290,7 @@
 	let cancelbutton = document.querySelector('.cancel-button');
 	
 	cancelbutton.addEventListener('click', function(){
-		location.href = './Bannerpage.jsp'
+		location.href = './Accounting.jsp'
 	});
 	//수정 버튼 눌렀을 때
 	let updatebutton = document.querySelector('.update-button');
