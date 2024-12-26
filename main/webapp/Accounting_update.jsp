@@ -93,13 +93,14 @@
 			        사유 &nbsp;&nbsp;&nbsp;: <input type="text" name="reason" placeholder="사유을 입력해 주세요." >
 			        <br>
 			        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reporting_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
+			        <input type="text" name="budget_no" value="<%= budget_no %>" hidden>
 		        </form>
-			        <div class="buttons">
+		        <div class="buttons">
 			        <button class="update-button">수 정</button>
 			        <button class="cancel-button">취 소</button>
-		       
-		        </div>
+	        	</div>
 		      </div>
+		  </div>
 		 <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
@@ -131,7 +132,7 @@
 					String work = rs.getString("work");
 					String Page_Link = Link.getPageLink(work) + "?user_id=" + user_id + "&department_id=" + department_id;
 %>
-					<li class="work_list"><a href=<%= Page_Link %>><%= rs.getString("work") %></a></li>
+					<li class="work_list"><a href=<%= Page_Link %><%= rs.getString("work") %>></a></li>
 <%
 				}
 				

@@ -18,12 +18,12 @@
 	String reason = request.getParameter("reason");
 	Date reporting_date = Date.valueOf(request.getParameter("reporting_date"));
 	Random random = new Random();
-	Integer budget_no = random.nextInt(2000) + 1;
+	Integer budget_no = random.nextInt(4000) + 1;
 	
 	
 	boolean isSuccess = false;
 
-	String sql = "INSERT INTO budget(finance, cash, reason, reporting_date) "
+	String sql = "INSERT INTO budget(budget_no, finance, cash, reason, reporting_date) "
 				 + "VALUES (?, ?, ?, ?, ?)";
 	try{
 		PreparedStatement pstmt = conn.prepareStatement(sql);

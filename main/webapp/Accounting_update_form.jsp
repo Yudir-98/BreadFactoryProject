@@ -6,13 +6,16 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="DBConnection.DBManager" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.time.LocalDate" %>
 <%
 	String user_id = request.getParameter("user_id");
+	Integer budget_no = Integer.parseInt(request.getParameter("budget_no"));
 	Integer emp_id = Integer.parseInt(request.getParameter("emp_id"));
 	String finance = request.getParameter("finance");
 	Integer cash = Integer.parseInt(request.getParameter("cash"));
 	String reason = request.getParameter("reason");
-	String reporting_date = request.getParameter("reporting_date");
+	Date reporting_date = Date.valueOf(request.getParameter("reporting_date"));
 	
 	
 	//실제 db에서 수정하는 코드
@@ -20,7 +23,7 @@
 	
 	String sql = "UPDATE budget " +
 			 "SET finance = ?, cash = ?, reason = ?, reporting_date = ? " +
-			 "WHERE user_id = ?";
+			 "WHERE budget_no = ?";
 
 		boolean isSuccess = false;
 		try {
@@ -28,30 +31,8 @@
 			pstmt.setString(1, finance);
 			pstmt.setInt(2, cash);
 			pstmt.setString(3, reason);
-			pstmt.setString(4, reporting_date);
-			
-			pstmt.executeUpdate();
-			
-			DBManager.dbClose(conn, pstmt, null);
-			
-			isSuccess = true;
-		} catch (Exception e) {
-		     e.printStackTrace();
-		}
-	
-		conn = DBManager.getDBConnection();
-		
-		sql = "UPDATE EMPLOYEES " +
-				  "SET emp_name = ?, phone_number = ?, position = ?, salary = ? " +
-				  "WHERE emp_id = ?";
-		isSuccess = false;
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, emp_name);
-			pstmt.setString(2, phone_number);
-			pstmt.setString(3, position);
-			pstmt.setInt(4, salary);
-			pstmt.setInt(5, emp_id);
+			pstmt.setDate(4, reporting_date);
+			pstmt.setInt(5, budget_no);
 			
 			pstmt.executeUpdate();
 			
@@ -67,14 +48,14 @@
 %>
    <script>
    alert('수정되었습니다.');
-   location.href = './Accounting.jsp'
+   location.href = './Accounting.jsp?user_id=' + '<%=user_id%>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('수정에 실패하였습니다.');
-   location.href = './Accounting_update.jsp'
+   location.href = './Accounting.jsp?user_id=' + '<%=user_id%>';
 </script>
 <%
    }
