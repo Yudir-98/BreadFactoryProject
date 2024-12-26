@@ -35,62 +35,120 @@
 			e.printStackTrace();
 		}
 %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./css/Accounting.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./css/Correspondent_Material.css">
 </head>
 <body>
   <div class="fullScreen">
-<div class="MainContent">
-      <div class="box1">
-        <div class="Announcement">
-          자산관리
-          <button class="add-button">+</button>
-        </div>
-      </div>
+    <div class="MainContent">
+    <div class="Announcement">
+		회계
+		<button class="add-button">+</button>
+    </div>
+    
     <div class="Box1">
       <div class="box2">
         <div class="Accounts">
-          <div class="Account" id="finance">&nbsp;&nbsp;&nbsp;&nbsp;분류</div>
-          <div class="Account" id="cash">&nbsp;&nbsp;&nbsp;&nbsp;금액</div>
-          <div class="Account" id="reason">&nbsp;&nbsp;사유</div>
-          <div class="Account" id="date">날짜</div>
+          <div class="Account" id="finance">분류</div>
+          <div class="Account" id="cash">금액</div>
+          <div class="Account" id="reason">사유</div>
+          <div class="Account" id="reporting_date">날짜</div>
         </div>
-        <div class="databox">
-          <ul class="data">
-            
-          </ul>
+        <div class="content"> 
+       <ul class="content_list">
+       
+       <%
+		//java로 sql실행하여 데이터 삽입하기
+		 conn = DBManager.getDBConnection();
+		
+		sql = "SELECT budget_no, finance, cash, reason, reporting_date " +
+					 "FROM budget ";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				String finance = rs.getString("finance");
+				String cash = rs.getString("cash");
+				String reason = rs.getString("reason");
+				String reporting_date = rs.getString("reporting_date");
+%>
+		<li class="contents">
+			<div class="content" id="finance"><%= finance %></div>
+			<div class="content" id="cash"><%= cash %></div>
+			<div class="content" id="reason"><%= reason %></div>
+			<div class="content" id="reporting_date"><%= reporting_date %></div>
+		</li>
+<%
+			}
+			
+			DBManager.dbClose(conn, pstmt, rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+%>
+       </ul>
         </div>
-
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+        <div class="line4"></div>
+        <div class="line5"></div>
       </div>
       <div class="box3">
-        <ul class="buttons">
-
-        </ul>
+      	<ul class="remake">
+<%
+		//java로 sql실행하여 데이터 삽입하기
+		conn = DBManager.getDBConnection();
+		
+		sql = "SELECT budget_no, finance, cash, reason, reporting_date " +
+					 "FROM budget ";
+		
+		try{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+		 while(rs.next()){
+%>
+	<li>
+		<button class="update-button" budget_no="<%= rs.getInt("budget_no") %>">수정</button>
+		<button class="delete-button" budget_no="<%= rs.getInt("budget_no") %>">삭제</button>
+	</li>
+<%
+		 }
+		DBManager.dbClose(conn, pstmt, rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+%>
+      	</ul>
       </div>
-      <div class="line1"></div>
-      <div class="line2"></div>
-      <div class="line3"></div>
-      <div class="line4"></div>
-    </div>
+    </div>	
+    
+    
     <div class="Box2">
         <select class="search">
-          <option value="search1" selected>분류</option>
-          <option value="search1" >금액</option>
-          <option value="search1" >사유</option>
-          <option value="search1" >날짜</option>
+          <option value="search1" selected>거래처명</option>
+          <option value="search1" >거래 품목</option>
+          <option value="search1" >원산지</option>
+          <option value="search1" >Tel</option>
         </select>
-        <div class="box5"></div>
+        <input class="box5"></input>
         <button class="btn1">검색</button>
       </div>
     </div>
+    </div>
+  </div>
+
 <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
@@ -179,22 +237,23 @@
       <div id="Logout_box"><a href='./Main.jsp'>로그아웃</a></div>
     </div>
 <!-- 여기까지 -->
-  </div>
-  <script>
+
+<script>
 //------------ 메뉴박스 --------------------
 	let user_id = "<%= user_id %>";
-  	let MenuButton = document.querySelector(".MenuButton");
+		let MenuButton = document.querySelector(".MenuButton");
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
-  
+	
 //------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
 	let LoginBox = document.querySelector("#Login_box");
 	let LogoutBox = document.querySelector("#Logout_box");
 	let MainContent = document.querySelector(".MainContent");
 	let LogoutBox_opend = false;
-	 // ------------ Personal 박스 --------------------
+	
+ 	 // ------------ Personal 박스 --------------------
    	if(user_id == "null") {
    		messageBox.style.opacity = 0;
    		messageBox.disabled = true;
@@ -250,9 +309,38 @@
 		} else {
 			LogoutBox.style.height = '0px';
 		}
-    }  	
+    }
+ 
+  //add-button 누르면 인원 추가
+  	let addbutton = document.querySelector('.add-button');
+  	
+  	addbutton.addEventListener('click', function(){
+  		location.href = './Accounting_add.jsp?user_id=' + '<%= user_id %>';
+  	});
+  	
+  	// 수정 버튼 누르면 수정
+  	let updatebutton = document.querySelectorAll(".update-button");
 
-  </script>
-</body>
+  	for(let i = 0; i < updatebutton.length; i++) {
+  		updatebutton[i].addEventListener('click', function(){
+  	  		const cor_name = updatebutton[i].getAttribute("cor_name");
+  	  		location.href = './Accounting_update.jsp?user_id=' + '<%= user_id %>' + '&budget_no='+ budget_no;
+  	  	});
+  	}
+  	
+  	// 삭제 버튼 누르면 
+	let deletebutton = document.querySelectorAll(".delete-button");
+
+  	for(let i = 0; i < deletebutton.length; i++) {
+  		deletebutton[i].addEventListener('click', function(){
+  	  		const cor_name = deletebutton[i].getAttribute("cor_name");
+  	  		if(confirm('삭제하시겠습니까?')){
+  	  		location.href = './Accounting_delete.jsp?user_id=' + '<%= user_id %>' + '&budget_no='+ budget_no;
+  	  		}
+  	  		
+  	  	});
+  	}
+</script>
+
 </body>
 </html>

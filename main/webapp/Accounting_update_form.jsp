@@ -7,32 +7,28 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="DBConnection.DBManager" %>
 <%
-	Integer emp_id = Integer.parseInt(request.getParameter("emp_id"));
-	String emp_name = request.getParameter("emp_name");
-	String birth_date = request.getParameter("birth_date");
-	String phone_number = request.getParameter("phone_number");
-	String hire_date = request.getParameter("hire_date");
-	String position = request.getParameter("position");
-	Integer salary = Integer.parseInt(request.getParameter("salary"));
 	String user_id = request.getParameter("user_id");
-	String user_password = request.getParameter("user_password");
-	String user_email = request.getParameter("user_email");
-	String user_nickname = request.getParameter("user_nickname");
+	Integer emp_id = Integer.parseInt(request.getParameter("emp_id"));
+	String finance = request.getParameter("finance");
+	Integer cash = Integer.parseInt(request.getParameter("cash"));
+	String reason = request.getParameter("reason");
+	String reporting_date = request.getParameter("reporting_date");
+	
 	
 	//실제 db에서 수정하는 코드
 	Connection conn = DBManager.getDBConnection();
 	
-	String sql = "UPDATE USERS " +
-			 "SET user_password = ?, user_email = ?, user_nickname = ? " +
+	String sql = "UPDATE budget " +
+			 "SET finance = ?, cash = ?, reason = ?, reporting_date = ? " +
 			 "WHERE user_id = ?";
 
 		boolean isSuccess = false;
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_password);
-			pstmt.setString(2, user_email);
-			pstmt.setString(3, user_nickname);
-			pstmt.setString(4, user_id);
+			pstmt.setString(1, finance);
+			pstmt.setInt(2, cash);
+			pstmt.setString(3, reason);
+			pstmt.setString(4, reporting_date);
 			
 			pstmt.executeUpdate();
 			

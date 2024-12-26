@@ -12,6 +12,7 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String add_form_link = "./Accounting_add_form.jsp?user_id=" + user_id; 
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -43,7 +44,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>인원 추가</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./css/Accounting-add.css">
+  <link rel="stylesheet" href="./css/Accounting_add.css">
 </head>
 <body>
   <div class="fullScreen">
@@ -52,30 +53,14 @@
         <h1>&nbsp;추 가</h1>
       </div>
       <div class="content">
-		<form id="form_information" action="./Accounting_add_form.jsp" method="POST">
-	        사원 번호 &nbsp;&nbsp;&nbsp;: <input type="text" name="emp_id" placeholder="사원 번호를 입력해 주세요.">
+		<form id="form_information" action="<%= add_form_link %>" method="POST">
+	        분류&nbsp;&nbsp;&nbsp;: <input type="text" name="finance" placeholder="수입 지출 중 작성해 주세요">
 	        <br>
-	        사원 이름 &nbsp;&nbsp;&nbsp;: <input type="text" name="emp_name" placeholder="사원 이름을 입력해 주세요." >
+	        금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cash" placeholder="금액을 입력해 주세요." >
 	        <br>
-	        생년월일 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="birth_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
+	        사유 &nbsp;&nbsp;&nbsp;: <input type="text" name="reason" placeholder="사유을 입력해 주세요." >
 	        <br>
-	        핸드폰번호 &nbsp;: <input type="text" name="phone_number" placeholder="핸드폰번호를 입력해 주세요." >
-	        <br>
-	        입사일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="hire_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
-	        <br>
-	        직책 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="position" placeholder="직책을 입력해 주세요.">
-	        <br>
-	        급여 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="salary" placeholder="급여를 입력해 주세요." >
-	        <hr>
-	        아이디 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="user_id" placeholder="아이디를 입력해 주세요." >
-	        <br>
-	        비밀번호 &nbsp;&nbsp;&nbsp;: <input type="password"  name="user_password" placeholder="비밀번호를 입력해 주세요." >
-	        <br>
-	        이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="email" name="user_email" placeholder="이메일을 입력해 주세요." >
-	        <br>
-	        닉네임 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="user_nickname" placeholder="닉네임을 입력해 주세요." >
-	        <hr>
-	        부서 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="dept_id" placeholder="2.인사 3.재무 4.분석 5.자재 6.생산 7.매장">
+	        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reporting_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
         </form>
         <div class="buttons">
         <button class="add-button">추가</button>
@@ -256,22 +241,22 @@
 			}
 	    }  	
 	 
-  		// 취소버튼
-	  let cancelbutton = document.querySelector('.cancel-button');
-		
-		cancelbutton.addEventListener('click', function(){
-			location.href = './Human_Resource.jsp';
-		});
-		//추가버튼
-	  let addbutton = document.querySelector('.add-button');
-	  
-  	  addbutton.addEventListener('click', function(){
-  		  const form_information = document.getElementById('form_information');
-  		
- 			  event.preventDefault();  // 기본 동작을 막음
- 		    
- 		      form_information.submit();   // form1의 action값으로 input데이터를 이동
-  	  });
+	// 취소버튼
+	let cancelbutton = document.querySelector('.cancel-button');
+	
+	cancelbutton.addEventListener('click', function(){
+		location.href = './Accounting.jsp?user_id=' + '<%= user_id %>';
+	});
+	//추가버튼
+	let addbutton = document.querySelector('.add-button');
+	
+	addbutton.addEventListener('click', function(){
+		const form_information = document.getElementById('form_information');
+	
+		event.preventDefault();  // 기본 동작을 막음
+		 
+		form_information.submit();   // form1의 action값으로 input데이터를 이동
+	});
   </script>
 </body>
 </html>

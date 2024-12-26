@@ -12,6 +12,8 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String budget_no = request.getParameter("budget_no");
+	String update_form_link = "./Accounting_update_form.jsp?user_id=" + user_id;
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -40,16 +42,10 @@
 	conn = DBManager.getDBConnection();
 	
 	emp_id = request.getParameter("emp_id");
-	String emp_id_now = emp_id;
-	String emp_name = "";
-	String birth_date = "";
-	String phone_number = "";
-	String hire_date = "";
-	String position = "";
-	String salary = "";
-	String user_password = "";
-	String user_email = "";
-	String user_nickname = "";
+	String finance = "";
+	String cash = "";
+	String reason = "";
+	String reporting_date = "";
 
 %>
 <!DOCTYPE html>
@@ -58,7 +54,7 @@
 <meta charset="EUC-KR">
 <title>인사 관리 수정 페이지</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="./css/Accounting-update.css">
+<link rel="stylesheet" href="./css/Accounting_update.css">
 </head>
 <body>
 	<div class="fullScreen">
@@ -66,65 +62,44 @@
 			<div class="Announcement">
 				<h1>&nbsp;수 정</h1>
 			</div>
-      <div class="content">
+      		<div class="content">
 <% 
 		conn = DBManager.getDBConnection();
 		
-		sql = "SELECT a.emp_id, a.emp_name, a.birth_date, a.phone_number, a.hire_date, c.dept_name, a.position, a.salary, d.user_id, d.user_password, d.user_email, d.user_nickname " +
-			 	"FROM EMPLOYEES a, DEPT_EMP b, DEPARTMENT c, USERS d " + 
-				"WHERE a.emp_id = b.emp_id AND b.dept_id = c.dept_id AND a.user_id = d.user_id " +
-			 	"AND a.emp_id = ? ";
+		sql = "SELECT finance, cash, reason, reporting_date " + 
+			  "FROM budget " + 
+			  "WHERE budget_no = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, emp_id_now);
+			pstmt.setString(1, budget_no);
 			
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			emp_name = rs.getString("emp_name");
-			birth_date = rs.getString("birth_date");
-			phone_number = rs.getString("phone_number");
-			hire_date = rs.getString("hire_date");
-			position = rs.getString("position");
-			salary = rs.getString("salary");
-			user_id = rs.getString("user_id");
-			user_password = rs.getString("user_password");
-			user_email = rs.getString("user_email");
-			user_nickname = rs.getString("user_nickname");
+			finance = rs.getString("finance");
+			cash = rs.getString("cash");
+			reason = rs.getString("reason");
+			reporting_date = rs.getString("reporting_date");
 			
 			DBManager.dbClose(conn, pstmt, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 %>
-		<form id="form_information" action="./Accounting_update_form.jsp" method="POST">
-	        사원 번호 &nbsp;&nbsp;&nbsp;: <input type="text" value="<%= emp_id %>" name="emp_id" required>
-	        <br>
-	        사원 이름 &nbsp;&nbsp;&nbsp;: <input type="text" value="<%= emp_name %>" name="emp_name" required>
-	        <br>
-	        생년월일 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= birth_date %>" name="birth_date" required>
-	        <br>
-	        핸드폰번호 &nbsp;: <input type="text" value="<%= phone_number %>" name="phone_number" required>
-	        <br>
-	        입사일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= hire_date %>" name="hire_date" required>
-	        <br>
-	        직책 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= position %>" name="position" required>
-	        <br>
-	        급여 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= salary %>" name="salary" required>
-	        <hr>
-	        아이디 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= user_id %>" name="user_id" required>
-	        <br>
-	        비밀번호 &nbsp;&nbsp;&nbsp;: <input type="password" value="<%= user_password %>" name="user_password" required>
-	        <br>
-	        이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="email" value="<%= user_email %>"  name="user_email" required>
-	        <br>
-	        닉네임 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= user_nickname %>" name="user_nickname" >
-	         </form>
-	        <div class="buttons">
-	        <button class="update-button">수 정</button>
-	        <button class="cancel-button">취 소</button>
-       
-        </div>
-      </div>
+				<form id="form_information" action="<%= update_form_link %>" method="POST">
+			        분류&nbsp;&nbsp;&nbsp;: <input type="text" name="finance" placeholder="수입 지출 중 작성해 주세요">
+			        <br>
+			        금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cash" placeholder="금액을 입력해 주세요." >
+			        <br>
+			        사유 &nbsp;&nbsp;&nbsp;: <input type="text" name="reason" placeholder="사유을 입력해 주세요." >
+			        <br>
+			        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reporting_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
+		        </form>
+			        <div class="buttons">
+			        <button class="update-button">수 정</button>
+			        <button class="cancel-button">취 소</button>
+		       
+		        </div>
+		      </div>
 		 <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
@@ -290,7 +265,7 @@
 	let cancelbutton = document.querySelector('.cancel-button');
 	
 	cancelbutton.addEventListener('click', function(){
-		location.href = './Accounting.jsp'
+		location.href = './Accounting.jsp?user_id=' + '<%= user_id %>';
 	});
 	//수정 버튼 눌렀을 때
 	let updatebutton = document.querySelector('.update-button');
