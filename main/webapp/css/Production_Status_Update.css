@@ -25,7 +25,7 @@ body {
 .MainContent {
   border: 1px solid #ccc;
   width: 62vw;
-  height: 700px;
+  height: 650px;
   margin: 20px;
   border-radius: 20px;
   background-color: white;
@@ -42,6 +42,48 @@ body {
   background-color: #615353;
   border-radius: 10px;
 }
+.Announcement > h1 {
+  margin: 3px;
+  margin-left: 5px;
+}
+.content{
+  color : black;
+  width: 59vw;
+  height: 500px;
+  text-align: center;
+  line-height: 80px;
+  font-size: 30px;
+  margin-top: 80px;
+}
+input{
+  margin-left: 10px;
+  width: 200px;
+  height: 50px;
+  font-size: 25px;
+}
+button{
+  width: 80px;
+  height: 40px;
+  font-size: 18px;
+  margin: 20px;
+  margin-top: 100px;  
+}
+.update-button{
+  background-color: #3046aa;
+  border-radius: 10px;
+}
+.update-button:hover{
+  cursor: pointer;
+}
+.cancel-button{
+  background-color: #9e291f;
+  border-radius: 10px;
+}
+.cancel-button:hover{
+  cursor: pointer;
+}
+
+
 .Menu {
   position:fixed;
   height: 100vh;
@@ -108,41 +150,9 @@ body {
     background-color: white;
     border-radius: 50%;
 }
-.content{
-  width: 59vw;
-  color: black;
-  padding: 15px;
-  line-height: 50px;
-}
-input{
-  width: 300px;
-  height: 35px;
-}
-select{
-  width: 300px;
-  height: 35px;
-}
-.buttons{
-  margin-left: 550px;
-}
-button{
-  width: 80px;
-  height: 40px;
-}
-.update-button{
-  background-color: #3046aa;
-  border-radius: 10px;
-}
-.update-button:hover{
-  cursor: pointer;
-}
-.cancel-button{
-  background-color: #9e291f;
-  border-radius: 10px;
-}
-.cancel-button:hover{
-  cursor: pointer;
-}
+
+
+
 
 /* 로그인 파트 */
 .Personal {

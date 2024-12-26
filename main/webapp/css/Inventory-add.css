@@ -17,7 +17,7 @@ body {
   top: 0.2vh;
   width: 99vw;
   height: 99vh;
-  background-color: #312726;
+  background: linear-gradient(to bottom, #312726, #81685e);
   display: flex;
   justify-content: center;
   align-items: end;
@@ -39,7 +39,7 @@ body {
   border: 1px soild #ccc;
   width: 59vw;
   height: 50px;
-  background-color:#312726;
+  background-color: #615353;
   border-radius: 10px;
   position: relative;
 }
