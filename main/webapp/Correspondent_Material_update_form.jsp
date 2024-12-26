@@ -74,7 +74,7 @@
 %>
 <script>
    alert('수정에 실패하였습니다.');
-   location.href = './Human_Resource_update.jsp?user_id=' + '<%= user_id%>';
+   location.href = './Correspondent_Material.jsp?user_id=' + '<%= user_id%>';
 </script>
 <%
    }

@@ -6,13 +6,13 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="DBConnection.DBManager" %>
-<%@ page import="java.sql.Date" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="Link.Link" %>
 <%
+	String cor_name = request.getParameter("cor_name");
+	String cor_address = request.getParameter("cor_address");
+	String cor_tel = request.getParameter("cor_tel");
+	
 	String user_id = request.getParameter("user_id");
 	String department_id = request.getParameter("department_id");
-	Integer message_count = 0;
 	String emp_id = "";
 	
 	//java로 sql실행하여 데이터 삽입하기
@@ -36,52 +36,44 @@
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-%>
-
-<%
+	
+	//실제 db에서 수정하는 코드
 	conn = DBManager.getDBConnection();
+	
+	sql = "UPDATE correspondent_product " +
+			 "SET cor_name = ?, cor_address = ?, cor_tel = ?" +
+			 "WHERE cor_name = ?";
 
-	String cor_name = request.getParameter("cor_name");
-	String cor_tel = request.getParameter("cor_tel");
-	String material = request.getParameter("material");
-	String origin = request.getParameter("origin");
-	
-	
-	boolean isSuccess = false;
-
-	sql = "INSERT INTO correspondent_material(cor_name, cor_tel, material, origin) "
-				 + "VALUES (?, ?, ?, ?)";
-	try{
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, cor_name);
-		pstmt.setString(2, cor_tel);
-		pstmt.setString(3, material);
-		pstmt.setString(4, origin);
-		
-		pstmt.executeUpdate();
-		
-		DBManager.dbClose(conn, pstmt, null);
-		
-		isSuccess = true;
-	} catch(Exception e) {
-		e.printStackTrace();
-		//exit();
-	}
-	
+		boolean isSuccess = false;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cor_name);
+			pstmt.setString(2, cor_address);
+			pstmt.setString(3, cor_tel);
+			pstmt.setString(4, cor_name);
+			
+			pstmt.executeUpdate();
+			
+			DBManager.dbClose(conn, pstmt, null);
+			
+			isSuccess = true;
+		} catch (Exception e) {
+		     e.printStackTrace();
+		}
 %>
 <%
    if(isSuccess){
 %>
    <script>
-   alert('추가되었습니다.');
-   location.href = './Correspondent_Material.jsp?user_id=' + '<%= user_id%>';
+   alert('수정되었습니다.');
+   location.href = './Correspondent_Product.jsp?user_id=' + '<%= user_id%>';
    </script>
 <%
    } else {
 %>
 <script>
-   alert('추가되지않았습니다.');
-   location.href = './Correspondent_Material.jsp?user_id=' + '<%= user_id%>';
+   alert('수정에 실패하였습니다.');
+   location.href = './Correspondent_Product.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }

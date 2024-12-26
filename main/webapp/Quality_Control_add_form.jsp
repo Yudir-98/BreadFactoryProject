@@ -11,6 +11,7 @@
 <%
 	Connection conn = DBManager.getDBConnection();
 
+	String user_id = request.getParameter("user_id");
 	Integer product_hist_num= Integer.parseInt(request.getParameter("product_hist_num"));
 	String product_name = request.getParameter("product_name");
 	Integer production = Integer.parseInt(request.getParameter("production"));
@@ -64,14 +65,14 @@
 %>
    <script>
    alert('추가되었습니다.');
-   location.href = './Human_Resource.jsp'
+   location.href = './Quality_Control.jsp?user_id=' + '<%= user_id %>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('추가되지않았습니다.');
-   location.href = './Human_Resource_add.jsp'
+   location.href = './Quality_Control_add.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }

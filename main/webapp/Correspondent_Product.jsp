@@ -41,93 +41,110 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./css/Correspondent_Product.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+  <link rel="stylesheet" href="./css/Correspondent_Product.css">
 </head>
 <body>
   <div class="fullScreen">
     <div class="MainContent">
-      <div class="box1">
-        <div class="Announcement">
-          납품 거래처 관리
-          <button class="add-button">+</button>
-        </div>
-      </div>
+    <div class="Announcement">
+		납품 거래처 관리
+		<button class="add-button">+</button>
+    </div>
+    
     <div class="Box1">
       <div class="box2">
         <div class="Accounts">
-          <div class="Account" id="company">&nbsp;&nbsp;&nbsp;&nbsp;거래처명</div>
-          <div class="Account" id="item">&nbsp;&nbsp;&nbsp;주소</div>
- 
+          <div class="Account" id="company">거래처명</div>
+          <div class="Account" id="address">주소</div>
           <div class="Account" id="phone">Tel</div>
         </div>
-        <div class="databox">
-          <ul class="data">
-             <%
-            conn = DBManager.getDBConnection();
-             sql = "SELECT cor_name, cor_tel, cor_address " + 
-            "FROM correspondent_product " ;
-            try {
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				
-				ResultSet rs = pstmt.executeQuery();
-				
-				while(rs.next()){
+        <div class="content"> 
+       <ul class="content_list">
+       
+       <%
+		//java로 sql실행하여 데이터 삽입하기
+		 conn = DBManager.getDBConnection();
+		
+		sql = "SELECT cor_name, cor_address, cor_tel " +
+					 "FROM correspondent_product ";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				String cor_name = rs.getString("cor_name");
+				String cor_address = rs.getString("cor_address");
+				String cor_tel = rs.getString("cor_tel");
 %>
-			<li>
-			<span><%= rs.getString("cor_name") %></span><span><%= rs.getString("cor_tel")%></span><span><%= rs.getString("cor_address")%></span>
-            </li>
+		<li class="contents">
+			<div class="content" id="cor_name"><%= cor_name %></div>
+			<div class="content" id="address"><%= cor_address %></div>
+			<div class="content" id="cor_tel"><%= cor_tel %></div>
+		</li>
 <%
-				}
-				DBManager.dbClose(conn, pstmt, rs);
-				} catch (Exception e) {
-				e.printStackTrace();
-				}
+			}
+			
+			DBManager.dbClose(conn, pstmt, rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 %>
-          </ul>
+       </ul>
         </div>
-
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line4"></div>
+        <div class="line5"></div>
       </div>
       <div class="box3">
-        <ul class="buttons">
-    <% 
-    	 conn = DBManager.getDBConnection();
-        
-         sql = "SELECT cor_name " + 
-         	   "FROM correspondent_product";
-        
-	
-	try {
-		PreparedStatement pstmt = conn.prepareStatement(sql);
+      	<ul class="remake">
+<%
+		//java로 sql실행하여 데이터 삽입하기
+		conn = DBManager.getDBConnection();
 		
-		ResultSet rs = pstmt.executeQuery();
+		sql = "SELECT cor_name " +
+					 "FROM correspondent_product ";
 		
-		while(rs.next()){
-        %>
-		<li class= "btns">
-			<button class="modify" cor_name="<%= rs.getString("cor_name")%>">수정</button>
-			<button class="delete" cor_name="<%= rs.getString("cor_name")%>">삭제</button>
-		</li>
-		<% 
-		}
+		try{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+		 while(rs.next()){
+%>
+	<li>
+		<button class="update-button" cor_name="<%= rs.getInt("cor_name") %>">수정</button>
+		<button class="delete-button" cor_name="<%= rs.getInt("cor_name") %>">삭제</button>
+	</li>
+<%
+		 }
 		DBManager.dbClose(conn, pstmt, rs);
 		} catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
-		%>
-        </ul>
+%>
+      	</ul>
       </div>
-      <div class="line1"></div>
-      <div class="line2"></div>
-      <div class="line4"></div>
-    </div>
-
+    </div>	
+    
+    
+    <div class="Box2">
+        <select class="search">
+          <option value="search1" selected>거래처명</option>
+          <option value="search1" >주소</option>
+          <option value="search1" >Tel</option>
+        </select>
+        <input class="box5"></input>
+        <button class="btn1">검색</button>
+      </div>
     </div>
     </div>
   </div>
 
- <!-- 메뉴 바 -->
+<!-- 메뉴 바 -->
 
 	<div class="MenuButton">
       <div class="menuButtonBar"></div>
@@ -182,7 +199,8 @@
         </div>	
     </div>
 <!-- 여기까지 -->
-    <!-- 로그인 창 -->
+
+<!-- 로그인 창 -->
 <%
 	conn = DBManager.getDBConnection();
 
@@ -214,48 +232,23 @@
       <div id="Logout_box"><a href='./Main.jsp'>로그아웃</a></div>
     </div>
 <!-- 여기까지 -->
-    
 
-  
-  </div>
-   <script>
-// ------------ 메뉴박스 --------------------
-  	let user_id = "<%= user_id %>";
-    let MenuButton = document.querySelector(".MenuButton");
-    let Workmenu = document.querySelector(".Workmenu");
-    let menu_WorksBox = document.querySelector(".menu_WorksBox");
-    let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
-    
-    
-
-// ------------ Personal 박스 --------------------
-    let messageBox = document.querySelector("#message_box");
-    let LoginBox = document.querySelector("#Login_box");
-    let LogoutBox = document.querySelector("#Logout_box");
-    let MainContent = document.querySelector(".MainContent");
-    let LogoutBox_opend = false;
-
-<%
-	conn = DBManager.getDBConnection();
-
-	sql ="SELECT dept_id FROM DEPT_EMP " +
-				"WHERE emp_id = ?";
+<script>
+//------------ 메뉴박스 --------------------
+	let user_id = "<%= user_id %>";
+		let MenuButton = document.querySelector(".MenuButton");
+	let Workmenu = document.querySelector(".Workmenu");
+	let menu_WorksBox = document.querySelector(".menu_WorksBox");
+	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
 	
-	try {
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		
-		pstmt.setString(1, department_id);
-		
-		ResultSet rs = pstmt.executeQuery();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-%>
-
-    
-
-    
- // ------------ Personal 박스 --------------------
+//------------ Personal 박스 --------------------
+	let messageBox = document.querySelector("#message_box");
+	let LoginBox = document.querySelector("#Login_box");
+	let LogoutBox = document.querySelector("#Logout_box");
+	let MainContent = document.querySelector(".MainContent");
+	let LogoutBox_opend = false;
+	
+ 	 // ------------ Personal 박스 --------------------
    	if(user_id == "null") {
    		messageBox.style.opacity = 0;
    		messageBox.disabled = true;
@@ -272,7 +265,7 @@
    	}
    	
    	messageBox.addEventListener ('click', function() {
-   		location.href='./Message.jsp?user_id=' + '<%= user_id %>' + '&';
+   		location.href='./Message.jsp?user_id=' + "<%= user_id %>";
    	})
 
 // ------------ 메뉴 박스 --------------------
@@ -281,7 +274,6 @@
     	Workmenu.style.opacity = 0.7;
     	Workmenu.style.left = '0.5vw';
     	MainContent.style.opacity = 0.3;
-    
     });
 
     document.addEventListener ('click', function(event) {
@@ -290,7 +282,6 @@
 	        Workmenu.style.left = '-400px';
 	        MenuButton.style.opacity = 1;
 	        MainContent.style.opacity = 1;
-	       
       }
     });
     
@@ -314,8 +305,37 @@
 			LogoutBox.style.height = '0px';
 		}
     }
-    
+ 
+  //add-button 누르면 인원 추가
+  	let addbutton = document.querySelector('.add-button');
+  	
+  	addbutton.addEventListener('click', function(){
+  		location.href = './Correspondent_Product_add.jsp?user_id=' + '<%= user_id %>';
+  	});
+  	
+  	// 수정 버튼 누르면 수정
+  	let updatebutton = document.querySelectorAll(".update-button");
 
-  </script>
+  	for(let i = 0; i < updatebutton.length; i++) {
+  		updatebutton[i].addEventListener('click', function(){
+  	  		const cor_name = updatebutton[i].getAttribute("cor_name");
+  	  		location.href = './Correspondent_Product_update.jsp?user_id=' + '<%= user_id %>' + '&cor_name='+ cor_name;
+  	  	});
+  	}
+  	
+  	// 삭제 버튼 누르면 
+	let deletebutton = document.querySelectorAll(".delete-button");
+
+  	for(let i = 0; i < deletebutton.length; i++) {
+  		deletebutton[i].addEventListener('click', function(){
+  	  		const cor_name = deletebutton[i].getAttribute("cor_name");
+  	  		if(confirm('삭제하시겠습니까?')){
+  	  		location.href = './Correspondent_Product_delete.jsp?user_id=' + '<%= user_id %>' + '&cor_name='+ cor_name;
+  	  		}
+  	  		
+  	  	});
+  	}
+</script>
+
 </body>
 </html>

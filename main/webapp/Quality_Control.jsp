@@ -321,8 +321,31 @@
     let addbutton = document.querySelector('.add-button');
     
     addbutton.addEventListener('click', function() {
-		location.href = 'Quality_Control_add.jsp';
+		location.href = 'Quality_Control_add.jsp?user_id=' + '<%= user_id %>';
 	});
+    
+ // 수정 버튼 누르면 수정
+  	let updatebutton = document.querySelectorAll(".update-button");
+
+  	for(let i = 0; i < updatebutton.length; i++) {
+  		updatebutton[i].addEventListener('click', function(){
+  	  		const hist_num = updatebutton[i].getAttribute("hist_num");
+  	  		location.href = './Quality_Control.jsp?hist_num=' + hist_num + '?user_id=' + '<%= user_id %>';
+  	  	});
+  	}
+  	
+  	// 삭제 버튼 누르면 
+	let deletebutton = document.querySelectorAll(".delete-button");
+
+  	for(let i = 0; i < deletebutton.length; i++) {
+  		deletebutton[i].addEventListener('click', function(){
+  	  		const hist_num = deletebutton[i].getAttribute("hist_num");
+  	  		if(confirm('삭제하시겠습니까?')){
+  	  		location.href = './Quality_Control_delete.jsp?hist_num=' + hist_num + '?user_id=' + '<%= user_id %>';
+  	  		}
+  	  		
+  	  	});
+  	}
   </script>
 </body>
 </html>

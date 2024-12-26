@@ -43,20 +43,17 @@
 
 	String cor_name = request.getParameter("cor_name");
 	String cor_tel = request.getParameter("cor_tel");
-	String material = request.getParameter("material");
-	String origin = request.getParameter("origin");
-	
+	String cor_address = request.getParameter("cor_address");
 	
 	boolean isSuccess = false;
 
-	sql = "INSERT INTO correspondent_material(cor_name, cor_tel, material, origin) "
-				 + "VALUES (?, ?, ?, ?)";
+	sql = "INSERT INTO correspondent_product(cor_name, cor_tel, cor_address) "
+				 + "VALUES (?, ?, ?)";
 	try{
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, cor_name);
 		pstmt.setString(2, cor_tel);
-		pstmt.setString(3, material);
-		pstmt.setString(4, origin);
+		pstmt.setString(3, cor_address);
 		
 		pstmt.executeUpdate();
 		
@@ -74,14 +71,14 @@
 %>
    <script>
    alert('추가되었습니다.');
-   location.href = './Correspondent_Material.jsp?user_id=' + '<%= user_id%>';
+   location.href = './Correspondent_Product.jsp?user_id=' + '<%= user_id %>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('추가되지않았습니다.');
-   location.href = './Correspondent_Material.jsp?user_id=' + '<%= user_id%>';
+   location.href = './Correspondent_Product.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }

@@ -12,7 +12,7 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
-	String add_form_link = "./Correspondent_Material_add_form.jsp?user_id=" + user_id;
+	String add_form_link = "./Correspondent_Product_add_form.jsp?user_id=" + user_id;
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -44,7 +44,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>인원 추가</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./css/Correspondent_Material_add.css">
+  <link rel="stylesheet" href="./css/Correspondent_Product_add.css">
 </head>
 <body>
   <div class="fullScreen">
@@ -56,9 +56,7 @@
 		<form id="form_information" action="<%= add_form_link%>" method="POST">
 	        거래처명 &nbsp;&nbsp;&nbsp;: <input type="text" name="cor_name" placeholder="거래처명을 입력해주세요.">
 	        <br>
-	        거래 품목 &nbsp;&nbsp;&nbsp;: <input type="text" name="material" placeholder="거래품목을 입력해주세요" >
-	        <br>
-	        원산지 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="origin" placeholder="원산지를 입력해주세요" >
+	        주소 &nbsp;&nbsp;&nbsp;: <input type="text" name="cor_address" placeholder="거래처 주소를 입력해주세요." >
 	        <br>
 	        Tel &nbsp;: <input type="text" name="cor_tel" placeholder="거래처 번호를 입력해주세요" >
         </form>
@@ -235,7 +233,7 @@
 	  let cancelbutton = document.querySelector('.cancel-button');
 		
 		cancelbutton.addEventListener('click', function(){
-			location.href = './Correspondent_Material.jsp?user_id=' + '<%= user_id%>';
+			location.href = './Correspondent_Product.jsp?user_id=' + '<%= user_id%>';
 		});
 		//추가버튼
 	  let addbutton = document.querySelector('.add-button');
