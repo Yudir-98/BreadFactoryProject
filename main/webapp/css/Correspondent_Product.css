@@ -25,7 +25,7 @@ body {
 
 .MainContent {
   border: 1px solid #ccc;
-  width: 62vw;
+  width: 70vw;
   margin: 20px;
   border-radius: 20px;
   background-color: white;
@@ -45,7 +45,7 @@ body {
 	border-radius: 10px;
 	padding-left: 2%;
 	font-size: 25px;
-	padding-top: 2%;
+	padding-top: 1%;
 	position: relative;
 }
 
@@ -104,6 +104,7 @@ body {
   background-color: black;
   position: absolute;
   margin-left: 7%;
+  top: 40px;
 }
 
 .line2 {
@@ -113,7 +114,7 @@ body {
   background-color: black;
   position: absolute;
   margin-left: 25%;
-  margin-top: 10px;
+  top: 50px;
 }
 
 .line4 {
@@ -123,7 +124,7 @@ body {
   background-color: black;
   position: absolute;
   margin-left: 65%;
-  margin-top: 10px;
+  top: 50px;
 }
 
 .line5 {
@@ -384,4 +385,23 @@ gap: 10px;
 
 #youtube {
 	color: #c4302b;
+}
+.content {
+	color: black;
+}
+.contents {
+	display: flex;
+	width: 100%;
+}
+#cor_name {
+	text-align:center;
+	width:25%;
+}
+#cor_address {
+	text-align:center;
+	width:40%;
+}
+#cor_tel {
+	text-align:center;
+	width:35%;
 }

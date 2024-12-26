@@ -59,7 +59,7 @@
           <div class="Account" id="address">주소</div>
           <div class="Account" id="phone">Tel</div>
         </div>
-        <div class="content"> 
+        <div class="content_box"> 
        <ul class="content_list">
        
        <%
@@ -82,7 +82,7 @@
 %>
 		<li class="contents">
 			<div class="content" id="cor_name"><%= cor_name %></div>
-			<div class="content" id="address"><%= cor_address %></div>
+			<div class="content" id="cor_address"><%= cor_address %></div>
 			<div class="content" id="cor_tel"><%= cor_tel %></div>
 		</li>
 <%
@@ -116,8 +116,8 @@
 		 while(rs.next()){
 %>
 	<li>
-		<button class="update-button" cor_name="<%= rs.getInt("cor_name") %>">수정</button>
-		<button class="delete-button" cor_name="<%= rs.getInt("cor_name") %>">삭제</button>
+		<button class="update-button" cor_name="<%= rs.getString("cor_name") %>">수정</button>
+		<button class="delete-button" cor_name="<%= rs.getString("cor_name") %>">삭제</button>
 	</li>
 <%
 		 }

@@ -42,7 +42,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./css/Correspondent_Material.css">
+  <link rel="stylesheet" href="./css/Accounting.css">
 </head>
 <body>
   <div class="fullScreen">
@@ -57,10 +57,10 @@
         <div class="Accounts">
           <div class="Account" id="finance">분류</div>
           <div class="Account" id="cash">금액</div>
-          <div class="Account" id="reason">사유</div>
+          <div class="Account" id="reason">&nbsp;&nbsp;&nbsp;사유</div>
           <div class="Account" id="reporting_date">날짜</div>
         </div>
-        <div class="content"> 
+        <div class="content_box"> 
        <ul class="content_list">
        
        <%
@@ -83,10 +83,10 @@
 				String reporting_date = rs.getString("reporting_date");
 %>
 		<li class="contents">
-			<div class="content" id="finance"><%= finance %></div>
-			<div class="content" id="cash"><%= cash %></div>
-			<div class="content" id="reason"><%= reason %></div>
-			<div class="content" id="reporting_date"><%= reporting_date %></div>
+			<div class="content" id="finance_check"><%= finance %></div>
+			<div class="content" id="cash_check"><%= cash %></div>
+			<div class="content" id="reason_check"><%= reason %></div>
+			<div class="content" id="reporting_date_check"><%= reporting_date %></div>
 		</li>
 <%
 			}
@@ -119,7 +119,7 @@
 			ResultSet rs = pstmt.executeQuery();
 		 while(rs.next()){
 %>
-	<li>
+	<li class="butns">
 		<button class="update-button" budget_no="<%= rs.getInt("budget_no") %>">수정</button>
 		<button class="delete-button" budget_no="<%= rs.getInt("budget_no") %>">삭제</button>
 	</li>
