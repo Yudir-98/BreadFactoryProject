@@ -40,9 +40,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>자재 거래처 관리</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/Correspondent_Material.css">
+  <style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
   <div class="fullScreen">
@@ -61,6 +73,10 @@
           <div class="Account" id="phone">Tel</div>
         </div>
         <div class="content"> 
+        <div class="line2"></div>
+        <div class="line3"></div>
+        <div class="line4"></div>
+        
        <ul class="content_list">
        
        <%
@@ -97,12 +113,10 @@
 		}
 %>
        </ul>
+       <div class="line5"></div>
         </div>
         <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-        <div class="line4"></div>
-        <div class="line5"></div>
+        
       </div>
       <div class="box3">
       	<ul class="remake">
@@ -133,18 +147,6 @@
       	</ul>
       </div>
     </div>	
-    
-    
-    <div class="Box2">
-        <select class="search">
-          <option value="search1" selected>거래처명</option>
-          <option value="search1" >거래 품목</option>
-          <option value="search1" >원산지</option>
-          <option value="search1" >Tel</option>
-        </select>
-        <input class="box5"></input>
-        <button class="btn1">검색</button>
-      </div>
     </div>
   </div>
 

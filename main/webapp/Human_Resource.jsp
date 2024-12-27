@@ -43,6 +43,18 @@
   <title>인사 관리</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/Human-Resource.css">
+  <style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
   <div class="fullScreen">
@@ -380,7 +392,7 @@
   	let addbutton = document.querySelector('.add-button');
   	
   	addbutton.addEventListener('click', function(){
-  		location.href = './Human_Resource_add.jsp?user_id=' + '<%=user_id%>';
+  		location.href = './Human_Resource_add.jsp?user_id=' + '<%= user_id %>';
   	});
   	
   	// 수정 버튼 누르면 수정

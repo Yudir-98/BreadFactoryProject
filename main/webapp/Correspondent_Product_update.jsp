@@ -47,9 +47,21 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>인사 관리 수정 페이지</title>
+<title>매장 관리 수정 페이지</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="./css/Correspondent_Product_update.css">
+<style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
 	<div class="fullScreen">
@@ -85,9 +97,9 @@
 		<form id="form_information" action="<%= update_form_link %>" method="POST">
 		        거래처명 &nbsp;&nbsp;&nbsp;: <input type="text" name="cor_name" value="<%= cor_name %>" placeholder="거래처명을 입력해주세요.">
 		        <br>
-		        주소 &nbsp;&nbsp;&nbsp;: <input type="text" name="cor_address" value="<%= cor_address %>" placeholder="거래처 주소를 입력해주세요." >
+		       주소 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cor_address" value="<%= cor_address %>" placeholder="거래처 주소를 입력해주세요." >
 		        <br>
-		        Tel &nbsp;: <input type="text" name="cor_tel" value="<%= cor_tel %>" placeholder="거래처 번호를 입력해주세요" >
+		        Tel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cor_tel" value="<%= cor_tel %>" placeholder="거래처 번호를 입력해주세요" >
 	         </form>
 	        <div class="buttons">
 	        <button class="update-button">수 정</button>
@@ -95,6 +107,8 @@
        
         </div>
       </div>
+
+    </div>
 		 <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
@@ -183,8 +197,6 @@
       	<div class="message_amount"><span class="message_count"><%= message_count %></span></div>
       </div>
       <div id="Logout_box"><a href='./Main.jsp'>로그아웃</a></div>
-    </div>
-<!-- 여기까지 -->
 	</div>
 	<script>
 	//------------ 메뉴박스 --------------------

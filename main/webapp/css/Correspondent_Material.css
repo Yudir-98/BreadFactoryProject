@@ -38,10 +38,11 @@ body {
 }
 
 .MainContent > .Announcement {
+	font-weight: bold;
 	border: 1px soild #ccc;
 	width: 59vw;
 	height: 50px;
-	background-color: #312726;
+	background-color: #615353;
 	border-radius: 10px;
 	padding-left: 2%;
 	font-size: 25px;
@@ -53,11 +54,15 @@ body {
 .Accounts {
     height: 50px;
     display: flex;
+    font-weight: bold;
+    font_size: 20px;
+    
   }
   
 .Account {
   color: black;
-  font-size: 95%;
+  font-size: 20px;
+  font-weight: bold;
   align-content: center;
   padding-bottom: 6px;
 }
@@ -65,6 +70,8 @@ body {
  .Box1 {
    display: flex;
    width: 100%;
+   margin-top: 20px;
+   margin-bottom: 15px;
  }
  
  .box2 {
@@ -86,12 +93,12 @@ body {
 #company {
   width: 35%;
   text-align: center;
-  padding-left: 21px;
 }
 
 #item {
   width: 15%;
   text-align: center;
+  font-size: 18px;
 }
 
 #country {
@@ -105,48 +112,49 @@ body {
 }
 .line1 {
   border: 1px solid black;
-  width: 92%;
+  width: 140%;
   height: 3px;
   background-color: black;
   position: absolute;
-  margin-left: 7%;
+  margin-left: 1%;
   top:45px;
 }
 
 .line2 {
   border: 1px solid black;
   width: 1px;
-  height: 80%;
+  height: 97%;
   background-color: black;
   position: absolute;
   margin-left: 35%;
-  top: 60px;
+  top: 3px;
 }
 .line3 {
   border: 1px solid black;
   width: 1px;
-  height: 80%;
+  height: 97%;
   background-color: black;
   position: absolute;
   margin-left: 50%;
-  top: 60px;
+  top: 3px;
   
 }
 .line4 {
   border: 1px solid black;
   width: 1px;
-  height: 80%;
+  height: 97%;
   background-color: black;
   position: absolute;
   margin-left: 70%;
-  top: 60px;
+  top: 3px;
 }
 
 .line5 {
 	opacity: 0;
-	height: 520px;
+	height: 147px;
 	position:relative;
 	width: 0px;
+	height: 45px;
 }
 
 .Box2 {
@@ -167,7 +175,7 @@ body {
 }
 
 .update-button{
-	background-color:#312726;
+	background-color: #615353;
 	color : white;
 	border-radius: 10px;
 	width:80px;
@@ -403,6 +411,7 @@ gap: 10px;
 }
 .content {
 	color: black;
+	position: relative;
 }
 .contents {
 	display: flex;
@@ -431,7 +440,9 @@ gap: 10px;
 }
 .content_list > .contents{
 	height: 30px;
+	margin-top: 3px;
 }	
 .remake > li {
 	height: 30px;
+	margin-top: 3px;
 }

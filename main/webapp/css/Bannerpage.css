@@ -61,11 +61,13 @@ body {
     border: 1px soild #ccc;
     width: 61vw;
     height: 50px;
-    background-color:#312726;
+    background-color: #615353;
+    font-weight:bold;
     border-radius: 10px;
     font-size: 30px;
     padding-left: 10px;
     margin-left: 5px;
+    align-content: center;
   }
   .Personal {
     position: fixed;

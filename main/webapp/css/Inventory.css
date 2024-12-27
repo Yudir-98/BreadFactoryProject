@@ -39,7 +39,7 @@ body {
   border: 1px soild #ccc;
   width: 59vw;
   height: 50px;
-  background-color:#312726;
+  background-color: #615353;
   border-radius: 10px;
   display:flex;
 }
@@ -194,7 +194,7 @@ body {
   text-align:center;
 }
 .update-button{
-  background-color:#312726;
+  background-color: #615353;
   color : white;
   border-radius: 10px;
   width:80px;

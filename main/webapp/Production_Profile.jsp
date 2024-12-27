@@ -42,15 +42,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>인사 관리</title>
+  <title>생산 현황 분석</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/Production_Profile.css">
+  <style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
   <div class="fullScreen">
     <div class="MainContent">
       <div class="Announcement">
-        <h1>&nbsp;생산 현황 관리</h1>
+        <h1>&nbsp;생산 현황 분석</h1>
       </div>
       <div class="MainContentBox">
         <div class="title">
@@ -61,6 +73,7 @@
         </div>
         <div class="RowLine"></div>
         <div class="content">
+        <div class="pillar"></div>
           <ul class="emp-id">
 <%
 		//java로 sql실행하여 데이터 삽입하기
@@ -105,7 +118,7 @@
 					Integer hour = now.getHour();
 					consumption = 1.0;
 					
-					
+					//System.out.println(random_num);
 					String then = "";
 					
 					rs2.next();
@@ -114,12 +127,11 @@
 					consumption = rs2.getDouble("consumption");
 					
 					double truncatedValue = Math.floor(consumption/production * random_num) / 100;
-
-					double hour_num = Math.floor(((9 - (20.0 - hour))/9.0) * 100);
+					
+					double hour_num = Math.floor(((11.0 - (20.0 - hour))/11.0) * 100);
 					hour_num = hour_num / 100.0;
 					
-					production_now = production * (1-truncatedValue) * hour_num * 9.1;
-					System.out.println(production_now);
+					production_now = production * (1-truncatedValue) * hour_num * 9.1 / 7.0;
 					DBManager.dbClose(null, pstmt2, rs2);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -146,6 +158,7 @@
 				
 				//System.out.println(production_now);
 				then_num = production_now - sum;
+				production_now = Math.ceil(production_now);
 %>
 				<li>
 				<div class="product_name"><%= product_name %></div>
@@ -183,8 +196,6 @@
 		}
 %>
           </ul>
-          <ul class="RightLine1"></ul>
-          <ul class="RightLine4"></ul>
         </div>
       </div>
     </div>

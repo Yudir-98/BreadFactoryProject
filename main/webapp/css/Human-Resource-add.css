@@ -35,14 +35,14 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   padding-top: 20px;
-  margin-bottom: 12%;
 }
 .MainContent > .Announcement {
   border: 1px soild #ccc;
   width: 59vw;
   height: 50px;
-  background-color:#312726;
+  background-color: #615353;
   border-radius: 10px;
+  align-content: center;
 }
 .Menu {
   position:fixed;

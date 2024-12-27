@@ -52,9 +52,21 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>인사 관리 수정 페이지</title>
+<title>회계 수정 페이지</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="./css/Accounting_update.css">
+<style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
 	<div class="fullScreen">
@@ -71,7 +83,7 @@
 			  "WHERE budget_no = ?";
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, budget_no);
+			pstmt.setInt(1, Integer.parseInt(budget_no));
 			
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
@@ -86,13 +98,13 @@
 		}
 %>
 				<form id="form_information" action="<%= update_form_link %>" method="POST">
-			        분류&nbsp;&nbsp;&nbsp;: <input type="text" name="finance" value="<%= finance %>" placeholder="수입 지출 중 작성해 주세요">
+			        분류 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="finance" value="<%= finance %>" placeholder="수입 지출 중 작성해 주세요">
 			        <br>
-			        금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cash" value="<%= cash %>" placeholder="금액을 입력해 주세요." >
+			        금액 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cash" value="<%= cash %>" placeholder="금액을 입력해 주세요." >
 			        <br>
-			        사유 &nbsp;&nbsp;&nbsp;: <input type="text" name="reason" value="<%= reason%>" placeholder="사유을 입력해 주세요." >
+			        사유 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reason" value="<%= reason%>" placeholder="사유을 입력해 주세요." >
 			        <br>
-			        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reporting_date" value="<%= reporting_date %>" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
+			        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reporting_date" value="<%= reporting_date %>" placeholder="YYYY-MM-DD형태로 입력해 주세요." > yyyy-mm-dd 형식으로 작성 해주세요
 			        <input type="text" name="budget_no" value="<%= budget_no %>" hidden>
 		        </form>
 		        <div class="buttons">

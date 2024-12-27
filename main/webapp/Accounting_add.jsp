@@ -42,9 +42,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>인원 추가</title>
+  <title>거래 내역 추가</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/Accounting_add.css">
+  <style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
   <div class="fullScreen">
@@ -54,11 +66,11 @@
       </div>
       <div class="content">
 		<form id="form_information" action="<%= add_form_link %>" method="POST">
-	        분류&nbsp;&nbsp;&nbsp;: <input type="text" name="finance" placeholder="수입 지출 중 작성해 주세요">
+	        분류 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="finance" placeholder="수입 지출 중 작성해 주세요">
 	        <br>
-	        금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cash" placeholder="금액을 입력해 주세요." >
+	        금액 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cash" placeholder="금액을 입력해 주세요." >
 	        <br>
-	        사유 &nbsp;&nbsp;&nbsp;: <input type="text" name="reason" placeholder="사유을 입력해 주세요." >
+	        사유 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reason" placeholder="사유을 입력해 주세요." >
 	        <br>
 	        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reporting_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
         </form>

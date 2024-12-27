@@ -53,6 +53,8 @@ body {
 .Accounts {
     height: 50px;
     display: flex;
+    font-weight: bold;
+    font-size: 20px;
   }
   
 .Account {
@@ -65,6 +67,7 @@ body {
  .Box1 {
    display: flex;
    width: 100%;
+   margin-top: 50px;
  }
  
  .box2 {
@@ -99,37 +102,37 @@ body {
 }
 .line1 {
   border: 1px solid black;
-  width: 92%;
+  width: 139%;
   height: 3px;
   background-color: black;
   position: absolute;
-  margin-left: 7%;
-  top: 40px;
+  margin-left: 2%;
+  top: -2%;
 }
 
 .line2 {
   border: 1px solid black;
   width: 1px;
-  height: 80%;
+  height: 97%;
   background-color: black;
   position: absolute;
   margin-left: 25%;
-  top: 50px;
+  top: 3px;
 }
 
 .line4 {
   border: 1px solid black;
   width: 1px;
-  height: 80%;
+  height: 97%;
   background-color: black;
   position: absolute;
   margin-left: 75%;
-  top: 50px;
+  top: 3px;
 }
 
 .line5 {
 	opacity: 0;
-	height: 520px;
+	height: 550px;
 	position:relative;
 	width: 0px;
 }
@@ -147,12 +150,12 @@ body {
   height: 25px;
   margin-left: 10px;
   border-radius: 15%;
-  background-color: #312726;
+  background-color: #615353;
   color: white;
 }
 
 .update-button{
-	background-color:#312726;
+	background-color: #615353;
 	color : white;
 	border-radius: 10px;
 	width:80px;
@@ -388,6 +391,9 @@ gap: 10px;
 }
 .content {
 	color: black;
+	display:flex;
+	flex-direction: column;
+	position: relative;
 }
 .contents {
 	display: flex;
@@ -407,7 +413,12 @@ gap: 10px;
 }
 .remake_buttons {
 	height: 30px;
+	display:  flex;
+	gap: 10px;
+	margin-left: 15px;
+	margin-top: 4px;
 }
 .content_list > .contents{
 	height: 30px;
+	margin-top: 4px;
 }

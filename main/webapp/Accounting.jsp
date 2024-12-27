@@ -43,6 +43,18 @@
   <title>회 계</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/Accounting.css">
+  <style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
   <div class="fullScreen">
@@ -64,7 +76,7 @@
 <% 
 		conn = DBManager.getDBConnection();
 
-		sql = "SELECT finance, cash, reason, reporting_date "
+		sql = "SELECT budget_no, finance, cash, reason, reporting_date "
 					+ "FROM budget";
 		
 		try{
@@ -89,7 +101,7 @@
 <% 
 		conn = DBManager.getDBConnection();
 
-		sql = "SELECT finance, cash, reason, reporting_date "
+		sql = "SELECT budget_no, finance, cash, reason, reporting_date "
 					+ "FROM budget";
 		
 		try{
@@ -114,7 +126,7 @@
 <% 
 		conn = DBManager.getDBConnection();
 
-		sql = "SELECT finance, cash, reason, reporting_date "
+		sql = "SELECT budget_no, finance, cash, reason, reporting_date "
 					+ "FROM budget";
 		
 		try{
@@ -139,7 +151,7 @@
 <% 
 		conn = DBManager.getDBConnection();
 
-		sql = "SELECT finance, cash, reason, reporting_date "
+		sql = "SELECT budget_no, finance, cash, reason, reporting_date "
 					+ "FROM budget";
 		
 		try{
@@ -164,7 +176,7 @@
 <%
 		conn = DBManager.getDBConnection();
 
-		sql = "SELECT finance, cash, reason, reporting_date "
+		sql = "SELECT budget_no, finance, cash, reason, reporting_date "
 			+ "FROM budget";
 		
 		try{
@@ -173,10 +185,11 @@
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()){
+				Integer budget_no = rs.getInt("budget_no");
 %>
 <li>
-<button class="update-button" reason="<%= rs.getString("reason") %>">수정</button>
-<button class="delete-button" reason="<%= rs.getString("reason") %>">삭제</button>
+<button class="update-button" budget_no="<%= rs.getInt("budget_no") %>">수정</button>
+<button class="delete-button" budget_no="<%= rs.getInt("budget_no") %>">삭제</button>
 </li>
 <%				
 			}

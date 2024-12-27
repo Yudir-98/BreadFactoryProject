@@ -11,7 +11,6 @@
 <%
 	String user_id = request.getParameter("user_id");
 	Integer budget_no = Integer.parseInt(request.getParameter("budget_no"));
-	Integer emp_id = Integer.parseInt(request.getParameter("emp_id"));
 	String finance = request.getParameter("finance");
 	Integer cash = Integer.parseInt(request.getParameter("cash"));
 	String reason = request.getParameter("reason");

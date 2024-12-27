@@ -13,7 +13,7 @@
 	Connection conn = DBManager.getDBConnection();
 	
 	String budget_no = request.getParameter("budget_no");
-	String user_id = "";
+	String user_id = request.getParameter("user_id");
 	
 
 	boolean isSuccess = false;
@@ -40,14 +40,14 @@
 %>
    <script>
    alert('삭제되었습니다.');
-   location.href = './Accounting.jsp?user_id=' + '<%=user_id %>';
+   location.href = './Accounting.jsp?user_id=' + '<%= user_id %>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('삭제되지않았습니다.');
-   location.href = './Accounting.jsp?user_id=' + '<%=user_id %>';
+   location.href = './Accounting.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }

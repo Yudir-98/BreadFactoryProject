@@ -40,10 +40,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>품질관리</title>
   <link rel="stylesheet" href="./css/Quality_Control.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+  <style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
 <div class="fullScreen">
@@ -63,6 +74,11 @@
           <div class="Account" id="date">날짜</div>
         </div>
         <div class="databox">
+        <div class="line1"></div>
+	    <div class="line2"></div>
+	    <div class="line3"></div>
+	    <div class="line4"></div>
+        
           <ul class="data">
 <% 
 			 conn = DBManager.getDBConnection();
@@ -95,10 +111,7 @@
         </div>
       </div>
 
-      <div class="line1"></div>
-      <div class="line2"></div>
-      <div class="line3"></div>
-      <div class="line4"></div>
+      
       <div class="box3">
         <ul class="buttons">
         <% 
@@ -329,7 +342,7 @@ function Logout_open() {
 	let addbutton = document.querySelector('.add-button');
 	
 	addbutton.addEventListener('click', function(){
-		location.href = './Quality_Control_add.jsp'
+		location.href = './Quality_Control_add.jsp?user_id='+ '<%= user_id %>';
 	});
     
  // 수정 버튼 누르면 수정

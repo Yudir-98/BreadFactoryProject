@@ -76,14 +76,14 @@ body {
 .contents{
   margin-top: 10px;
   color: black;
-  height: 500px;
+  
   display: flex;
   font-size: 20px;
 }
 .content1{
   border-right: 1px solid black;
   width: 200px;
-  height: 500px;
+  
   text-align: center;
   list-style: none;
   line-height: 40px;
@@ -91,7 +91,7 @@ body {
 .content2{
   border-right: 1px solid black;
   width: 200px;
-  height: 500px;
+  
   text-align: center;
   list-style: none;
   line-height: 40px;
@@ -99,7 +99,7 @@ body {
 .content3{
   border-right: 1px solid black;
   width: 200px;
-  height: 500px;
+  
   text-align: center;
   list-style: none;
   line-height: 40px;
@@ -107,22 +107,22 @@ body {
 .content4{
   border-right: 1px solid black;
   width: 200px;
-  height: 500px;
+  
   text-align: center;
   list-style: none;
   line-height: 40px;
-  font-size:15px;
+  font-size:12px;
 }
 .content5{
   width: 200px;
-  height: 500px;
+  
   text-align: center;
   list-style: none;
   line-height: 40px;
 }
 
 .update-button{
-  background-color:#312726;
+  background-color: #615353;
   color : white;
   border-radius: 10px;
   width:70px;

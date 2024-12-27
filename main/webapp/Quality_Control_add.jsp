@@ -40,10 +40,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>인원 추가</title>
+  <title>품질 기록 추가</title>
   <link rel="stylesheet" href="./css/Quality_Control_add.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
- 
+ 	<style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
   <div class="fullScreen">
@@ -53,15 +64,15 @@
       </div>
       <div class="content">
       <form id="form_information" action="./Quality_Control_add_form.jsp" method="POST">
-      생산 넘버 &nbsp;&nbsp;&nbsp;: <input name="product_hist_num" type="text" placeholder="생산 넘버를 입력해주세요." required>
+      생산넘버 &nbsp;&nbsp;&nbsp;: <input name="product_hist_num" type="text" placeholder="생산 넘버를 입력해주세요." required>
         <br>
-       품목 &nbsp;&nbsp;&nbsp;: <input name="product_name" type="text" placeholder="제품명을 입력해주세요." required>
+       품목 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input name="product_name" type="text" placeholder="제품명을 입력해주세요." required>
         <br>
-        생산량 &nbsp;&nbsp;&nbsp;: <input name="production" type="text" placeholder="생산 수량을 입력해 주세요." required>
+        생산량 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input name="production" type="text" placeholder="생산 수량을 입력해 주세요." required>
         <br>
-        불량품 &nbsp;&nbsp;&nbsp;: <input name="defective" type="text" placeholder="불량 수량을 입력해 주세요." required>
+        불량품 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input name="defective" type="text" placeholder="불량 수량을 입력해 주세요." required>
         <br>
-        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input name ="reporting_date" type="text" placeholder="날짜를 입력해 주세요." required>
+        날짜 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input name ="reporting_date" type="text" placeholder="날짜를 입력해 주세요." required>
 		</form>
         <div class="buttons">
         <button class="complete-button">완료</button>
@@ -245,7 +256,7 @@
   let completebutton = document.querySelector('.complete-button');
 	
 	cancelbutton.addEventListener('click', function(){
-		location.href = './Quality_Control.jsp'	
+		location.href = './Quality_Control.jsp?user_id=' + '<%= user_id %>';	
 		
 	});
 	completebutton.addEventListener('click', function(){

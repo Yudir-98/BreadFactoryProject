@@ -40,10 +40,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>메일함</title>
 <!-- 긁어오기 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/Message.css">
+  <style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
   <div class="fullScreen">    
@@ -188,10 +200,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {

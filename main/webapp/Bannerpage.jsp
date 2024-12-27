@@ -40,16 +40,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>교육 기획</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./css/Bannerpage.css">
+  <style>
+  	@font-face {
+	   font-family: 'Moneygraphy-Roundend';
+	   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+	}
+	
+	body {
+		font-family: 'Moneygraphy-Roundend';
+	}
+  </style>
 </head>
 <body>
   <div class="fullScreen">
     <div class="MainContent">
       <div class="box1">
         <div class="Announcement">
-          공지사항 관리
+          <b>교육 기획</b>
         </div>
       </div>
         <div class="Boxes">
@@ -64,7 +76,7 @@
                 <img class="imgs1" src="./img/imgs1.jpg">
               </div>
             </div>
-            <button class="btn1">수정</button>
+            
           </div>
         <div class="Box2">
           <div class="bannerbox2">
@@ -77,7 +89,7 @@
               <img class="imgs2" src="./img/imgs2.jpg">
             </div>
           </div>
-          <button class="btn1">수정</button>
+          
         </div>
         <div class="Box3">
           <div class="bannerbox3">
@@ -90,7 +102,7 @@
               <img class="imgs3" src="./img/imgs3.jpg">
             </div>
           </div>
-          <button class="btn1">수정</button>
+          
         </div>
       </div>
         <div class="line1"></div>
@@ -195,95 +207,84 @@
 
   </div>
   <script>
-//------------ 메뉴박스 --------------------
-	let user_id = "<%= user_id %>";
-	let MenuButton = document.querySelector(".MenuButton");
-	let Workmenu = document.querySelector(".Workmenu");
-	let menu_WorksBox = document.querySelector(".menu_WorksBox");
-	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
-	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
-
-//------------ Personal 박스 --------------------
-	let messageBox = document.querySelector("#message_box");
-	let LoginBox = document.querySelector("#Login_box");
-	let LogoutBox = document.querySelector("#Logout_box");
-	let MainContent = document.querySelector(".MainContent");
-	let LogoutBox_opend = false;
+	//------------ 메뉴박스 --------------------
+	  let user_id = "<%= user_id %>";
+	  	let MenuButton = document.querySelector(".MenuButton");
+	  let Workmenu = document.querySelector(".Workmenu");
+	  let menu_WorksBox = document.querySelector(".menu_WorksBox");
+	  let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	  let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 	
- 	 // ------------ Personal 박스 --------------------
-   	if(user_id == "null") {
-   		messageBox.style.opacity = 0;
-   		messageBox.disabled = true;
-   		LoginBox.addEventListener('click', function() {
-   			location.href='./LoginPage.jsp';
-   		});
-   	} else {
-   		messageBox.style.opacity = 1;
-   		LoginBox.addEventListener('click', function() {
-   			LogoutBox.disabled = false;
-   			LogoutBox_opend = true;
-   			Logout_open();
-   		});
-   	}
-   	
-   	messageBox.addEventListener ('click', function() {
-   		location.href='./Message.jsp?user_id=' + "<%= user_id %>";
-   	})
+	  //------------ Personal 박스 --------------------
+	  let messageBox = document.querySelector("#message_box");
+	  let LoginBox = document.querySelector("#Login_box");
+	  let LogoutBox = document.querySelector("#Logout_box");
+	  let MainContent = document.querySelector(".MainContent");
+	  let LogoutBox_opend = false;
+	  
+	 	 // ------------ Personal 박스 --------------------
+	   	if(user_id == "null") {
+	   		messageBox.style.opacity = 0;
+	   		messageBox.disabled = true;
+	   		LoginBox.addEventListener('click', function() {
+	   			location.href='./LoginPage.jsp';
+	   		});
+	   	} else {
+	   		messageBox.style.opacity = 1;
+	   		LoginBox.addEventListener('click', function() {
+	   			LogoutBox.disabled = false;
+	   			LogoutBox_opend = true;
+	   			Logout_open();
+	   		});
+	   	}
+	   	
+	   	messageBox.addEventListener ('click', function() {
+	   		location.href='./Message.jsp?user_id=' + "<%= user_id %>";
+	   	})
 
-// ------------ 메뉴 박스 --------------------
-    MenuButton.addEventListener ('click', function() {
-    	MenuButton.style.opacity = 0;
-    	Workmenu.style.opacity = 0.7;
-    	Workmenu.style.left = '0.5vw';
-    	MainContent.style.opacity = 0.3;
-    });
+	// ------------ 메뉴 박스 --------------------
+	    MenuButton.addEventListener ('click', function() {
+	    	MenuButton.style.opacity = 0;
+	    	Workmenu.style.opacity = 0.7;
+	    	Workmenu.style.left = '0.5vw';
+	    	MainContent.style.opacity = 0.3;
+	    });
 
-    document.addEventListener ('click', function(event) {
-    	if (!Workmenu.contains(event.target) && !MenuButton.contains(event.target)) {
-	        Workmenu.style.opacity = 0.0;
-	        Workmenu.style.left = '-400px';
-	        MenuButton.style.opacity = 1;
-	        MainContent.style.opacity = 1;
-      }
-    });
-    
-    WorksBox_Tag.addEventListener ('click', function() {
-    	WorkBox_open();
-    });
-    
-    function WorkBox_open() {
-    	if(menu_WorksBox.style.height == '0px') {
-    		menu_WorksBox.style.height = 'auto';
-    	} else {
-    		menu_WorksBox.style.height = '0px';
-    	}
-    }
-    
-    Menu_BoardBox.addEventListener ('click', function() {
-    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
-    });
-    
- // ------------ Personal 함수 --------------------
-    function Logout_open() {
-    	if(LogoutBox.style.height == '0px') {
-			LogoutBox.style.height = '50px';
-		} else {
-			LogoutBox.style.height = '0px';
-		}
-    }  	
+	    document.addEventListener ('click', function(event) {
+	    	if (!Workmenu.contains(event.target) && !MenuButton.contains(event.target)) {
+		        Workmenu.style.opacity = 0.0;
+		        Workmenu.style.left = '-400px';
+		        MenuButton.style.opacity = 1;
+		        MainContent.style.opacity = 1;
+	      }
+	    });
+	    
+	    WorksBox_Tag.addEventListener ('click', function() {
+	    	WorkBox_open();
+	    });
+	    
+	    function WorkBox_open() {
+	    	if(menu_WorksBox.style.height == '0px') {
+	    		menu_WorksBox.style.height = 'auto';
+	    	} else {
+	    		menu_WorksBox.style.height = '0px';
+	    	}
+	    }
+	    
+	    Menu_BoardBox.addEventListener ('click', function() {
+	    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+	    });
+	    
+	 // ------------ Personal 함수 --------------------
+	    function Logout_open() {
+	    	if(LogoutBox.style.height == '0px') {
+				LogoutBox.style.height = '50px';
+			} else {
+				LogoutBox.style.height = '0px';
+			}
+	    }  	
 
- 
-    let deletebutton = document.querySelectorAll(".delete-button");
 
-  	for(let i = 0; i < deletebutton.length; i++) {
-  		deletebutton[i].addEventListener('click', function(){
-  	  		const message_no = deletebutton[i].getAttribute("message_no");
-  	  		if(confirm('삭제하시겠습니까?')){
-  	  		location.href = './Message_delete.jsp?message_no=' + message_no + '&user_id=' + '<%= user_id %>';
-  	  		}
-  	  		
-  	  	});
-  	}
     </script>
 </body>
 </html>
