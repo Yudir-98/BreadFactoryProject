@@ -7,6 +7,7 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="DBConnection.DBManager" %>
 <%
+	String user_id = request.getParameter("user_id");
 	String product_name = request.getParameter("product_name");
 	Integer expected_production = Integer.parseInt(request.getParameter("expected_production"));
 	Integer expected_consumption = Integer.parseInt(request.getParameter("expected_consumption"));
@@ -38,14 +39,14 @@
 %>
    <script>
    alert('수정되었습니다.');
-   location.href = './Production_Status.jsp'
+   location.href = './Production_Status.jsp?user_id=' + '<%= user_id %>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('수정에 실패하였습니다.');
-   location.href = './Production_Status_Update.jsp'
+   location.href = './Production_Status_Update.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }

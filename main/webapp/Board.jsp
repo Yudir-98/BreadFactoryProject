@@ -7,11 +7,14 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="DBConnection.DBManager" %>
 <%@ page import="Link.Link" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.time.LocalDate" %>
 <%
 	String user_id = request.getParameter("user_id");
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String content_link = "./Board_Content.jsp?user_id=" + user_id + "&bno=";
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -52,8 +55,61 @@
       <div class="box1">
         <div class="Announcement">
           게시판
+          <button class="add-button">+</button>
         </div>
-        </div>
+      </div>
+      <div class="lead_box">
+      <div class="box2">
+      	<div class="tags">
+      		<div class="title">제목</div>
+      		<div class="writer">작성자</div>
+      		<div class="date">날짜</div>
+      	</div>
+      </div>
+      <div class="line"></div>
+      <div class="Board_Content">
+      	<ul class="content_list">
+       
+       <%
+		//java로 sql실행하여 데이터 삽입하기
+		conn = DBManager.getDBConnection();
+		
+		sql = "SELECT bno, title, writer, nickname, write_date " +
+					 "FROM board";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				Integer bno = rs.getInt("bno");
+				String title = rs.getString("title");
+				String writer = rs.getString("writer");
+				String nickname = rs.getString("nickname");
+				String write_date = rs.getString("write_date");
+				
+				String pre = content_link;
+				content_link = content_link + bno;
+%>
+		<li class="contents">
+			<div class="content" id="title"><a href="<%= content_link %>"><%= title %></a></div>
+			<div class="content" id="nickname"><%= nickname %></div>
+			<div class="content" id="write_date"><%= write_date %></div>
+		</li>
+<%
+				content_link = pre;
+			}
+			
+			DBManager.dbClose(conn, pstmt, rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+%>
+       </ul>
+      </div>
+     </div>
   </div>
 <!-- 메뉴 바 -->
 
@@ -75,10 +131,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -151,6 +209,7 @@
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
   
 //------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
@@ -209,6 +268,10 @@
     	}
     }
     
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
+    
  // ------------ Personal 함수 --------------------
     function Logout_open() {
     	if(LogoutBox.style.height == '0px') {
@@ -218,6 +281,13 @@
 		}
     }  	
 
+    //add-button 누르면 인원 추가
+  	let addbutton = document.querySelector('.add-button');
+  	
+  	addbutton.addEventListener('click', function(){
+  		location.href = './Board_add.jsp?user_id=' + '<%= user_id %>';
+  	});
+ 
   </script>
 </body>
 </html>

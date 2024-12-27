@@ -12,6 +12,7 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String add_form_link = "./Human_Resource_add_form.jsp?user_id=" + user_id;
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -52,7 +53,7 @@
         <h1>&nbsp;추 가</h1>
       </div>
       <div class="content">
-		<form id="form_information" action="./Human_Resource_add_form.jsp" method="POST">
+		<form id="form_information" action="<%= add_form_link %>" method="POST">
 	        사원 번호 &nbsp;&nbsp;&nbsp;: <input type="text" name="emp_id" placeholder="사원 번호를 입력해 주세요.">
 	        <br>
 	        사원 이름 &nbsp;&nbsp;&nbsp;: <input type="text" name="emp_name" placeholder="사원 이름을 입력해 주세요." >
@@ -104,10 +105,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -180,6 +183,7 @@
 	  let Workmenu = document.querySelector(".Workmenu");
 	  let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	  let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	  let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 	
 	  //------------ Personal 박스 --------------------
 	  let messageBox = document.querySelector("#message_box");
@@ -247,6 +251,10 @@
 	    	}
 	    }
 	    
+	    Menu_BoardBox.addEventListener ('click', function() {
+	    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+	    });
+	    
 	 // ------------ Personal 함수 --------------------
 	    function Logout_open() {
 	    	if(LogoutBox.style.height == '0px') {
@@ -260,7 +268,7 @@
 	  let cancelbutton = document.querySelector('.cancel-button');
 		
 		cancelbutton.addEventListener('click', function(){
-			location.href = './Human_Resource.jsp';
+			location.href = './Human_Resource.jsp?user_id=' + '<%= user_id %>';
 		});
 		//추가버튼
 	  let addbutton = document.querySelector('.add-button');

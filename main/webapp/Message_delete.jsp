@@ -12,19 +12,18 @@
 <%
 	Connection conn = DBManager.getDBConnection();
 	
-	String budget_no = request.getParameter("budget_no");
+	Integer message_no = Integer.parseInt(request.getParameter("message_no"));
 	String user_id = "";
 	
-
 	boolean isSuccess = false;
 	
-	String sql = "DELETE FROM budget WHERE budget_no = ?";
+	String sql = "DELETE FROM messages WHERE message_no = ?";
 	
 	try{
 		conn = DBManager.getDBConnection();
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, Integer.parseInt(budget_no));
+		pstmt.setInt(1, message_no);
 		
 		pstmt.executeUpdate();
 		
@@ -34,20 +33,21 @@
 	} catch(Exception e){
 		e.printStackTrace();
 	}
+	
 %>
 <%
    if(isSuccess){
 %>
    <script>
    alert('삭제되었습니다.');
-   location.href = './Accounting.jsp?user_id=' + '<%=user_id %>';
+   location.href = './Message.jsp?user_id=' + <%= user_id %>;
    </script>
 <%
    } else {
 %>
 <script>
    alert('삭제되지않았습니다.');
-   location.href = './Accounting.jsp?user_id=' + '<%=user_id %>';
+   location.href = './Message.jsp?user_id=' + <%= user_id %>;
 </script>
 <%
    }

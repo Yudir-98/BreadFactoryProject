@@ -11,10 +11,11 @@
 	request.setCharacterEncoding("UTF-8");
 
 	String user_id = request.getParameter("user_id");
-	String department_id = request.getParameter("department_id");
+	String department_id = "0";
 	Integer message_count = 0;
 	String emp_id = "";
 	String today_work_add_link = "./Main_Today_Work_add.jsp?user_id=" + user_id;
+	String board_content_link = "./Board_Content.jsp?user_id=" + user_id + "&bno=";
 	
 	Connection conn = DBManager.getDBConnection();
 
@@ -70,11 +71,13 @@
 
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
-			
+		  
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+				
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -185,7 +188,50 @@
         </div>
         <!-- 사내 게시판 -->
         <div class="SecBox2">
-        
+        	<div class="Board_Title">사내 게시판</div>
+        	<div class="line_box_for_board"></div>
+        	<div class="Board-Content">
+        		<ul class="content_list">
+       
+<%
+				//java로 sql실행하여 데이터 삽입하기
+				conn = DBManager.getDBConnection();
+				
+				sql = "SELECT bno, title, writer, nickname, write_date " +
+							 "FROM board";
+				
+				try {
+					PreparedStatement pstmt = conn.prepareStatement(sql);
+					
+					ResultSet rs = pstmt.executeQuery();
+					
+					Integer max_num = 0 ;
+					while(rs.next() && max_num < 3) {
+						Integer bno = rs.getInt("bno");
+						String title = rs.getString("title");
+						String writer = rs.getString("writer");
+						String nickname = rs.getString("nickname");
+						String write_date = rs.getString("write_date");
+						
+						String pre = board_content_link;
+						board_content_link = board_content_link + bno;
+		%>
+				<li class="board_contents">
+					<div class="board_content" id="title"><a href="<%= board_content_link %>"><%= title %></a></div>
+					<div class="board_content" id="nickname"><%= nickname %></div>
+				</li>
+		<%
+						board_content_link = pre;
+						max_num++;
+					}
+					
+					DBManager.dbClose(conn, pstmt, rs);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		%>
+		       </ul>
+        	</div>
         </div>
       </div>
     </div>
@@ -254,6 +300,7 @@
     let Workmenu = document.querySelector(".Workmenu");
     let menu_WorksBox = document.querySelector(".menu_WorksBox");
     let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+    let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
     
     
 // ------------ 시계 --------------------
@@ -420,7 +467,7 @@
    	}
    	
    	messageBox.addEventListener ('click', function() {
-   		location.href='./Message.jsp?user_id=' + '<%= user_id %>' + '&';
+   		location.href='./Message.jsp?user_id=' + '<%= user_id %>';
    	})
 
 // ------------ 메뉴 박스 --------------------
@@ -445,6 +492,11 @@
     WorksBox_Tag.addEventListener ('click', function() {
     	WorkBox_open();
     });
+    
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
+    
     
  // ------------ MainContent1 함수 --------------------
     function today_work_add_open() {

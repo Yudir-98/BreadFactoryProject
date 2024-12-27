@@ -74,6 +74,8 @@
 			
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
+			cor_address = rs.getString("cor_address");
+			cor_tel = rs.getString("cor_tel");
 			
 			DBManager.dbClose(conn, pstmt, rs);
 		} catch (Exception e) {
@@ -113,10 +115,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -189,6 +193,7 @@
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 
 	//------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
@@ -245,6 +250,10 @@
     		menu_WorksBox.style.height = '0px';
     	}
     }
+    
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
     
  // ------------ Personal 함수 --------------------
     function Logout_open() {

@@ -12,6 +12,7 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String add_form_link = "./Board_add_form.jsp?user_id=" + user_id;
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -43,7 +44,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>인원 추가</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./css/Board-add.css">
+  <link rel="stylesheet" href="./css/Board_add.css">
 </head>
 <body>
   <div class="fullScreen">
@@ -52,30 +53,11 @@
         <h1>&nbsp;추 가</h1>
       </div>
       <div class="content">
-		<form id="form_information" action="./Board_add_form.jsp" method="POST">
-	        사원 번호 &nbsp;&nbsp;&nbsp;: <input type="text" name="emp_id" placeholder="사원 번호를 입력해 주세요.">
+		<form id="form_information" action="<%= add_form_link %>" method="POST">
+			<input type="text" name="user_id" value="<%= user_id %>>" hidden>
+	        제목 &nbsp;&nbsp;&nbsp;: <input type="text" name="title" placeholder="제목을 입력해 주세요.">
 	        <br>
-	        사원 이름 &nbsp;&nbsp;&nbsp;: <input type="text" name="emp_name" placeholder="사원 이름을 입력해 주세요." >
-	        <br>
-	        생년월일 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="birth_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
-	        <br>
-	        핸드폰번호 &nbsp;: <input type="text" name="phone_number" placeholder="핸드폰번호를 입력해 주세요." >
-	        <br>
-	        입사일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="hire_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
-	        <br>
-	        직책 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="position" placeholder="직책을 입력해 주세요.">
-	        <br>
-	        급여 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="salary" placeholder="급여를 입력해 주세요." >
-	        <hr>
-	        아이디 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="user_id" placeholder="아이디를 입력해 주세요." >
-	        <br>
-	        비밀번호 &nbsp;&nbsp;&nbsp;: <input type="password"  name="user_password" placeholder="비밀번호를 입력해 주세요." >
-	        <br>
-	        이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="email" name="user_email" placeholder="이메일을 입력해 주세요." >
-	        <br>
-	        닉네임 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="user_nickname" placeholder="닉네임을 입력해 주세요." >
-	        <hr>
-	        부서 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="dept_id" placeholder="2.인사 3.재무 4.분석 5.자재 6.생산 7.매장">
+	        내용 &nbsp;&nbsp;&nbsp;: <input type="text" name="content" placeholder="내용을 입력해 주세요." >
         </form>
         <div class="buttons">
         <button class="add-button">추가</button>
@@ -104,10 +86,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -180,6 +164,7 @@
 	  let Workmenu = document.querySelector(".Workmenu");
 	  let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	  let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	  let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 	
 	  //------------ Personal 박스 --------------------
 	  let messageBox = document.querySelector("#message_box");
@@ -188,16 +173,6 @@
 	  let MainContent = document.querySelector(".MainContent");
 	  let LogoutBox_opend = false;
 	  
-	//수정 버튼 누르면 수정
-		let updatebutton = document.querySelectorAll(".update-button");
-		
-		for(let i = 0; i < updatebutton.length; i++){
-			updatebutton[i].addEventListener('click', function(){
-	  	  		const material = updatebutton[i].getAttribute("material");
-	  	  		location.href = './Inventory_Update.jsp?material=' + material;
-	  	  	});
-		}
-		
 	 	 // ------------ Personal 박스 --------------------
 	   	if(user_id == "null") {
 	   		messageBox.style.opacity = 0;
@@ -247,6 +222,10 @@
 	    	}
 	    }
 	    
+	    Menu_BoardBox.addEventListener ('click', function() {
+	    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+	    });
+	    
 	 // ------------ Personal 함수 --------------------
 	    function Logout_open() {
 	    	if(LogoutBox.style.height == '0px') {
@@ -260,7 +239,7 @@
 	  let cancelbutton = document.querySelector('.cancel-button');
 		
 		cancelbutton.addEventListener('click', function(){
-			location.href = './Human_Resource.jsp';
+			location.href = './Board.jsp';
 		});
 		//추가버튼
 	  let addbutton = document.querySelector('.add-button');

@@ -12,6 +12,7 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String update_form_link = "./Inventory-update-form.jsp?user_id=" + user_id;
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -79,7 +80,7 @@
 			e.printStackTrace();
 		}
 %>
-		<form id="form_information" action="./Inventory-update-form.jsp" method="POST">
+		<form id="form_information" action="<%= update_form_link %>" method="POST">
         재 료&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= material %>" name="material" required>
         <br>
         수 량&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= amount %>" name="amount" required>
@@ -112,10 +113,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -188,6 +191,7 @@
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 	
 	//------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
@@ -245,6 +249,10 @@
     	}
     }
     
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
+    
  // ------------ Personal 함수 --------------------
     function Logout_open() {
     	if(LogoutBox.style.height == '0px') {
@@ -258,7 +266,7 @@
 	let cancelbutton = document.querySelector('.cancel-button');
 	
 	cancelbutton.addEventListener('click', function(){
-		location.href = './Inventory.jsp'
+		location.href = './Inventory.jsp?user_id=' + '<%= user_id %>'
 	});
 	//수정 버튼 눌렀을 때
 	let updatebutton = document.querySelector('.update-button');

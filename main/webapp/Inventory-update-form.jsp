@@ -8,6 +8,7 @@
 <%@ page import="DBConnection.DBManager" %>
 
 <%
+	String user_id = request.getParameter("user_id");
 	String material = request.getParameter("material");
 	Integer amount = Integer.parseInt(request.getParameter("amount"));
 	String unit = request.getParameter("unit");
@@ -39,14 +40,14 @@
 %>
    <script>
    alert('수정되었습니다.');
-   location.href = './Inventory.jsp'
+   location.href = './Inventory.jsp?user_id=' + '<%= user_id %>'
    </script>
 <%
    } else {
 %>
 <script>
    alert('수정에 실패하였습니다.');
-   location.href = './Inventory_Update.jsp'
+   location.href = './Inventory_Update.jsp?user_id=' + '<%= user_id %>'
 </script>
 <%
    }

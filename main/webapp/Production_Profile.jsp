@@ -7,12 +7,13 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="DBConnection.DBManager" %>
 <%@ page import="Link.Link" %>
+<%@ page import="java.util.Random" %>
+<%@ page import="java.time.LocalDateTime" %>
 <%
 	String user_id = request.getParameter("user_id");
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
-	String add_form_link = "./Correspondent_Material_add_form.jsp?user_id=" + user_id;
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -36,40 +37,159 @@
 			e.printStackTrace();
 		}
 %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>인원 추가</title>
+  <title>인사 관리</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./css/Correspondent_Material_add.css">
+  <link rel="stylesheet" href="./css/Production_Profile.css">
 </head>
 <body>
   <div class="fullScreen">
     <div class="MainContent">
       <div class="Announcement">
-        <h1>&nbsp;추 가</h1>
+        <h1>&nbsp;생산 현황 관리</h1>
       </div>
-      <div class="content">
-		<form id="form_information" action="<%= add_form_link%>" method="POST">
-	        거래처명 &nbsp;&nbsp;&nbsp;: <input type="text" name="cor_name" placeholder="거래처명을 입력해주세요.">
-	        <br>
-	        거래 품목 &nbsp;&nbsp;&nbsp;: <input type="text" name="material" placeholder="거래품목을 입력해주세요" >
-	        <br>
-	        원산지 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="origin" placeholder="원산지를 입력해주세요" >
-	        <br>
-	        Tel &nbsp;: <input type="text" name="cor_tel" placeholder="거래처 번호를 입력해주세요" >
-        </form>
-        <div class="buttons">
-        <button class="add-button">추가</button>
-        <button class="cancel-button">취소</button>
+      <div class="MainContentBox">
+        <div class="title">
+          <div class="title1"><p><b>제품</b></p></div>
+          <div class="title2"><p><b>현재생산량</b></p></div>
+          <div class="title3"><p><b>현 주문량</b></p></div>
+          <div class="title4"><p><b>비고</b></p></div>
+        </div>
+        <div class="RowLine"></div>
+        <div class="content">
+          <ul class="emp-id">
+<%
+		//java로 sql실행하여 데이터 삽입하기
+		conn = DBManager.getDBConnection();
+		
+		sql = "SELECT product_id, product_name " + 
+			  "FROM PRODUCTS";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			
+			String product_id_now;
+			
+			String product_name = "";
+			Double production_now = 0.0;
+			Double then_num = 0.0;
+			Double sum = 0.0;
+			Double consumption = 1.0;
+			Double production = 1.0;
+			
+			while(rs.next()) {
+				sum=0.0;
+				
+				product_id_now = rs.getString("product_id");
+				
+				sql = "SELECT a.product_id, a.product_name, a.expected_production, b.production, b.consumption " + 
+					  "FROM PRODUCTS a, HISTORY b " +
+					  "WHERE a.product_id = b.product_id " +
+					  "AND a.product_id = ?";
+				try {
+					PreparedStatement pstmt2 = conn.prepareStatement(sql);
+					pstmt2.setInt(1, Integer.parseInt(product_id_now));	
+				
+					ResultSet rs2 = pstmt2.executeQuery();
+					
+					Random random = new Random();
+					Double random_num = 0.5 + random.nextDouble();
+					LocalDateTime now = LocalDateTime.now();
+					Integer hour = now.getHour();
+					consumption = 1.0;
+					
+					
+					String then = "";
+					
+					rs2.next();
+					product_name =rs2.getString("product_name");
+					production = rs2.getDouble("production");
+					consumption = rs2.getDouble("consumption");
+					
+					double truncatedValue = Math.floor(consumption/production * random_num) / 100;
+
+					double hour_num = Math.floor(((9 - (20.0 - hour))/9.0) * 100);
+					hour_num = hour_num / 100.0;
+					
+					production_now = production * (1-truncatedValue) * hour_num * 9.1;
+					System.out.println(production_now);
+					DBManager.dbClose(null, pstmt2, rs2);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				sql = "SELECT quantity " +
+					  "FROM SALE " +
+					  "WHERE product_id = ?";
+				try {
+					PreparedStatement pstmt2 = conn.prepareStatement(sql);
+					pstmt2.setInt(1, Integer.parseInt(product_id_now));
+					
+				
+					ResultSet rs2 = pstmt2.executeQuery();
+					
+					while(rs2.next()) {
+						sum = sum + rs2.getDouble("quantity");
+					}
+					
+					DBManager.dbClose(null, pstmt2, rs2);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				//System.out.println(production_now);
+				then_num = production_now - sum;
+%>
+				<li>
+				<div class="product_name"><%= product_name %></div>
+				<div class="production_now"><%= production_now %></div>
+				<div class="order_now"><%= sum %></div>
+				<%
+				if(then_num >= 100) {
+				%>
+					<div class="then" style="color: blue">생산 과다+</div>
+				<%
+				} else if (then_num < 100 && then_num >= 30) {
+				%>
+					<div class="then" style="color: blue">생산 과다</div>
+				<%
+				} else if (then_num < 30 && then_num >-30) {
+				%>
+					<div class="then" style="color: blue">유지</div>
+				<%  
+				} else if (then_num <= -30 && then_num > -100) {
+				%>
+					<div class="then" style="color: red">생산 부족</div>
+				<%
+				} else {
+				%>
+					<div class="then" style="color: red">생산 부족+</div>
+				<%
+				}
+				%>
+				</li>
+<%
+			}	
+			DBManager.dbClose(conn, pstmt, rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+%>
+          </ul>
+          <ul class="RightLine1"></ul>
+          <ul class="RightLine4"></ul>
         </div>
       </div>
     </div>
 
-        <!-- 메뉴 바 -->
+   <!-- 메뉴 바 -->
 
 	<div class="MenuButton">
       <div class="menuButtonBar"></div>
@@ -175,8 +295,8 @@
 	  let LogoutBox = document.querySelector("#Logout_box");
 	  let MainContent = document.querySelector(".MainContent");
 	  let LogoutBox_opend = false;
-		
-	 	 // ------------ Personal 박스 --------------------
+	  
+	  // ------------ Personal 박스 --------------------
 	   	if(user_id == "null") {
 	   		messageBox.style.opacity = 0;
 	   		messageBox.disabled = true;
@@ -237,23 +357,8 @@
 				LogoutBox.style.height = '0px';
 			}
 	    }  	
-	 
-  		// 취소버튼
-	  let cancelbutton = document.querySelector('.cancel-button');
-		
-		cancelbutton.addEventListener('click', function(){
-			location.href = './Correspondent_Material.jsp?user_id=' + '<%= user_id%>';
-		});
-		//추가버튼
-	  let addbutton = document.querySelector('.add-button');
-	  
-  	  addbutton.addEventListener('click', function(){
-  		  const form_information = document.getElementById('form_information');
-  		
- 			  event.preventDefault();  // 기본 동작을 막음
- 		    
- 		      form_information.submit();   // form1의 action값으로 input데이터를 이동
-  	  });
+
+  	
   </script>
 </body>
 </html>

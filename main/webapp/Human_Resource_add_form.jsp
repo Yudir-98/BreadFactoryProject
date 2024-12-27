@@ -94,14 +94,14 @@
 %>
    <script>
    alert('추가되었습니다.');
-   location.href = './Human_Resource.jsp'
+   location.href = './Human_Resource.jsp?user_id=' + '<%= user_id %>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('추가되지않았습니다.');
-   location.href = './Human_Resource_add.jsp'
+   location.href = './Human_Resource_add.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }

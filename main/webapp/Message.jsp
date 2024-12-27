@@ -70,9 +70,12 @@
 					 "FROM MESSAGES " +
 					 "WHERE user_id = ?";
 		
+		if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_id);
+			
+			if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -140,7 +143,7 @@
 		 while(rs.next()){			 
 %>
 	<li>
-		<button class="delete-button" user_id="<%= rs.getInt("message_no") %>">삭제</button>
+		<button class="delete-button" message_no="<%= rs.getInt("message_no") %>">삭제</button>
 	</li>
 <%
 		 }
@@ -262,6 +265,7 @@
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
   
 //------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
@@ -336,6 +340,10 @@
     	}
     }
     
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
+    
  // ------------ Personal 함수 --------------------
     function Logout_open() {
     	if(LogoutBox.style.height == '0px') {
@@ -345,6 +353,18 @@
 		}
     }  	
 
+ 
+    let deletebutton = document.querySelectorAll(".delete-button");
+
+  	for(let i = 0; i < deletebutton.length; i++) {
+  		deletebutton[i].addEventListener('click', function(){
+  	  		const message_no = deletebutton[i].getAttribute("message_no");
+  	  		if(confirm('삭제하시겠습니까?')){
+  	  		location.href = './Message_delete.jsp?message_no=' + message_no + '&user_id=' + '<%= user_id %>';
+  	  		}
+  	  		
+  	  	});
+  	}
   </script>
 </body>
 </html>

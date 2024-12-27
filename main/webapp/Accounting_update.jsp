@@ -86,13 +86,13 @@
 		}
 %>
 				<form id="form_information" action="<%= update_form_link %>" method="POST">
-			        분류&nbsp;&nbsp;&nbsp;: <input type="text" name="finance" placeholder="수입 지출 중 작성해 주세요">
+			        분류&nbsp;&nbsp;&nbsp;: <input type="text" name="finance" value="<%= finance %>" placeholder="수입 지출 중 작성해 주세요">
 			        <br>
-			        금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cash" placeholder="금액을 입력해 주세요." >
+			        금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="cash" value="<%= cash %>" placeholder="금액을 입력해 주세요." >
 			        <br>
-			        사유 &nbsp;&nbsp;&nbsp;: <input type="text" name="reason" placeholder="사유을 입력해 주세요." >
+			        사유 &nbsp;&nbsp;&nbsp;: <input type="text" name="reason" value="<%= reason%>" placeholder="사유을 입력해 주세요." >
 			        <br>
-			        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reporting_date" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
+			        날짜 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="reporting_date" value="<%= reporting_date %>" placeholder="YYYY-MM-DD형태로 입력해 주세요." >
 			        <input type="text" name="budget_no" value="<%= budget_no %>" hidden>
 		        </form>
 		        <div class="buttons">
@@ -121,10 +121,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -197,6 +199,7 @@
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 
 	//------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
@@ -253,6 +256,10 @@
     		menu_WorksBox.style.height = '0px';
     	}
     }
+    
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
     
  // ------------ Personal 함수 --------------------
     function Logout_open() {

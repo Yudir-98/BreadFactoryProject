@@ -244,7 +244,8 @@ body {
     font-size: 12px;
     color: black;
 }
-        
+
+/* 사내 게시판 파트 */
 .Main_ContentBox2 > .SecBox2 {
   border: 1px solid #ccc;
   width: 28vw;
@@ -254,6 +255,38 @@ body {
   background-color: white;
   border-radius: 15px;
 }
+
+.Board_Title {
+	color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #312727;
+    width: 80%;
+    margin-top: 4%;
+    margin-left: 3%;
+}
+
+.board_contents {
+	display: flex;
+	color: black;
+	padding-top: 2px;
+}
+#title{
+	padding-left: 5%;
+	padding-bottom: 3px;
+	width: 70%;
+	overflow: hidden;
+	
+}
+
+#title > a {
+	text-decoration: none;
+	color: black;
+}
+#nickname{
+	width: 30%;
+}
+
 
 /* 로그인 파트 */
 .Personal {

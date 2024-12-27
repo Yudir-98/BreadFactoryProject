@@ -12,6 +12,7 @@
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	String update_form_link = "./Production_Status_Update_form.jsp?user_id=" + user_id;
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -79,7 +80,7 @@
 			e.printStackTrace();
 		}
 %>   
-		<form id="form_information" action="./Production_Status_Update_form.jsp" method="POST">
+		<form id="form_information" action="<%= update_form_link %>" method="POST">
         제품 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= product_name %>" name="product_name" required>
         <br>
         예상 생산량 : <input type="text" value="<%= expected_production %>" name="expected_production" required>
@@ -113,10 +114,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -187,7 +190,7 @@
 	let cancelbutton = document.querySelector('.cancel-button');
 	
 	cancelbutton.addEventListener('click', function(){
-		location.href = './Production_Status.jsp'
+		location.href = './Production_Status.jsp?user_id=' + '<%= user_id %>';
 	});
 	
 	//수정 버튼 눌렀을 때
@@ -206,6 +209,7 @@
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 
 	//------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
@@ -262,6 +266,10 @@
     		menu_WorksBox.style.height = '0px';
     	}
     }
+    
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
     
  // ------------ Personal 함수 --------------------
     function Logout_open() {

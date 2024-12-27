@@ -60,7 +60,7 @@
           <div class="Account" id="country">원산지</div>
           <div class="Account" id="phone">Tel</div>
         </div>
-        <div class="content_box"> 
+        <div class="content"> 
        <ul class="content_list">
        
        <%
@@ -110,8 +110,8 @@
 		//java로 sql실행하여 데이터 삽입하기
 		conn = DBManager.getDBConnection();
 		
-		sql = "SELECT cor_name " +
-					 "FROM correspondent_material ";
+		sql = "SELECT cor_name, material, origin, cor_tel " +
+		 "FROM correspondent_material ";		
 		
 		try{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -119,7 +119,7 @@
 			ResultSet rs = pstmt.executeQuery();
 		 while(rs.next()){
 %>
-	<li>
+	<li class="remake_buttons">
 		<button class="update-button" cor_name="<%= rs.getString("cor_name") %>">수정</button>
 		<button class="delete-button" cor_name="<%= rs.getString("cor_name") %>">삭제</button>
 	</li>
@@ -146,7 +146,6 @@
         <button class="btn1">검색</button>
       </div>
     </div>
-    </div>
   </div>
 
 <!-- 메뉴 바 -->
@@ -169,10 +168,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -245,6 +246,7 @@
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 	
 //------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
@@ -301,6 +303,10 @@
     		menu_WorksBox.style.height = '0px';
     	}
     }
+    
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
     
  // ------------ Personal 함수 --------------------
     function Logout_open() {

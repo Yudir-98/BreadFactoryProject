@@ -78,7 +78,7 @@ body {
  }
  
  .box3 {
-   border: 1px solid red;
+   /*border: 1px solid red;*/
    width: 30%;
    margin-top: 50px;
   }
@@ -89,12 +89,12 @@ body {
 }
 
 #address {
-  width: 40%;
+  width: 50%;
   text-align: center;
 }
 
 #phone {
-  width: 35%;
+  width: 25%;
   text-align: center;
 }
 .line1 {
@@ -123,7 +123,7 @@ body {
   height: 80%;
   background-color: black;
   position: absolute;
-  margin-left: 65%;
+  margin-left: 75%;
   top: 50px;
 }
 
@@ -399,9 +399,15 @@ gap: 10px;
 }
 #cor_address {
 	text-align:center;
-	width:40%;
+	width:50%;
 }
 #cor_tel {
 	text-align:center;
-	width:35%;
+	width:25%;
+}
+.remake_buttons {
+	height: 30px;
+}
+.content_list > .contents{
+	height: 30px;
 }

@@ -21,7 +21,8 @@ body {
   border-radius: 20px;
   top: 0.2vh;
   width: 99%;
-  background-color: #312726;
+  background: linear-gradient(to bottom, #312726, #81685e);
+  /*background-color: #312726;*/
   display: flex;
   justify-content: center;
   align-items: end;
@@ -30,7 +31,6 @@ body {
 .MainContent {
   border: 1px solid #ccc;
   width: 70%;
-  height: 750px;
   margin: 20px;
   border-radius: 20px;
   background-color: white;
@@ -70,7 +70,7 @@ body {
 
   
   .box1 {
-    height: 150px;
+    height: 80px;
     
   }
   .Box1 {
@@ -82,29 +82,27 @@ body {
     width: 70%;
   }
   .box3 {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     width: 30%;
     margin-top: 50px;
   }
   #item {
-  width:100px;
+  width:25%;
   text-align:center;
   }
 #deliveryquantity {
-
-  width: 200px;
+	
+  width:20%;
   text-align: center;
 }
 #defectivequantity {
   
-  width: 200px;
+  width:15%;
   text-align: start;
-margin-left: 5px;
 }
 #date {
-  width: 130px;
+  width:40%;
   text-align: start;
-  margin-right: 25px;
 }
 .line1 {
   border: 1px solid black;
@@ -118,32 +116,61 @@ margin-left: 5px;
 .line2 {
   border: 1px solid black;
   width: 1px;
-  height: 350px;
+  height: 95%;
   background-color: black;
   position: absolute;
-  margin-left: 80px;
+  margin-left: 14%;
   margin-top: 50px;
 }
 .line3 {
   border: 1px solid black;
   width: 1px;
-  height: 350px;
+  height: 95%;
   background-color: black;
   position: absolute;
-  margin-left: 200px;
+  margin-left: 22%;
   margin-top: 50px;
 }
 .line4 {
   border: 1px solid black;
   width: 1px;
-  height: 350px;
+  height: 95%;
   background-color: black;
   position: absolute;
-  margin-left: 320px;
+  margin-left: 27%;
   margin-top: 50px;
 }
 
-
+.remake{
+  width: 20vw;
+  margin-left: 30px;
+  margin-top: 1vw;
+  background-color: white;
+  border-radius: 15px;
+  list-style-type: none;
+  line-height:30px;
+  text-align:center;
+}
+.update-button{
+	background-color:#312726;
+	color : white;
+	border-radius: 10px;
+	width:80px;
+	height:25px;
+}
+.update-button:hover{
+	cusor:pointer;
+}
+.delete-button{
+	background-color:#312726;
+	color : white;
+	border-radius: 10px;
+	width:80px;
+	height:25px;
+}
+.delete-button:hover{
+	cusor:pointer;
+}
 
 
 
@@ -264,8 +291,6 @@ gap: 10px;
 	color: #c4302b;
 }
 .databox {
-
-  height: 350px;
   width: 100%;
   display: flex;
 }
@@ -276,16 +301,21 @@ gap: 10px;
   border-radius: 50%;
   font-size: 30px;
   color: #312726;
-  margin-left: 560px;
-  margin-top: 7px;
+  margin-left: 60%;
+  margin-top: 8px;
+  position: absolute;
 }
 
 .data {
 	color: black;
+	width: 100%;
 }
 .btns {
 	display: flex;
+	height: 30px;
 }
+
+
 /* 로그인 파트 */
 .Personal {
   position: fixed;
@@ -370,4 +400,9 @@ gap: 10px;
 
 .message_count {
 	font-weight: bold;
+}
+
+.data > li{
+	display: flex;
+	height: 30px;
 }

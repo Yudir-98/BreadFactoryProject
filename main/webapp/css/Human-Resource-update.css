@@ -18,6 +18,7 @@ body {
   width: 99vw;
   height: 99vh;
   background: linear-gradient(to bottom, #312726, #81685e);
+  /*background-color: #312726;*/
   display: flex;
   justify-content: center;
   align-items: end;
@@ -39,7 +40,7 @@ body {
   border: 1px soild #ccc;
   width: 59vw;
   height: 50px;
-  background-color: #615353;
+  background-color:#312726;
   border-radius: 10px;
 }
 .Menu {

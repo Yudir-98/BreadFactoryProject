@@ -16,7 +16,8 @@ body {
   border-radius: 20px;
   top: 0.2vh;
   width: 99vw;
-  background-color: #312726;
+  background: linear-gradient(to bottom, #312726, #81685e);
+  /*background-color: #312726;*/
   display: flex;
   justify-content: center;
   align-items: end;

@@ -71,14 +71,14 @@
 %>
    <script>
    alert('수정되었습니다.');
-   location.href = './Human_Resource.jsp'
+   location.href = './Human_Resource.jsp?user_id=' + '<%= user_id %>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('수정에 실패하였습니다.');
-   location.href = './Human_Resource_update.jsp'
+   location.href = './Human_Resource_update.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }

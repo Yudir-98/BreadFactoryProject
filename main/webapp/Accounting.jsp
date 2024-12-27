@@ -57,10 +57,10 @@
         <div class="Accounts">
           <div class="Account" id="finance">분류</div>
           <div class="Account" id="cash">금액</div>
-          <div class="Account" id="reason">&nbsp;&nbsp;&nbsp;사유</div>
+          <div class="Account" id="reason">사유</div>
           <div class="Account" id="reporting_date">날짜</div>
         </div>
-        <div class="content_box"> 
+        <div class="content"> 
        <ul class="content_list">
        
        <%
@@ -83,10 +83,10 @@
 				String reporting_date = rs.getString("reporting_date");
 %>
 		<li class="contents">
-			<div class="content" id="finance_check"><%= finance %></div>
-			<div class="content" id="cash_check"><%= cash %></div>
-			<div class="content" id="reason_check"><%= reason %></div>
-			<div class="content" id="reporting_date_check"><%= reporting_date %></div>
+			<div class="content" id="finance"><%= finance %></div>
+			<div class="content" id="cash"><%= cash %></div>
+			<div class="content" id="reason"><%= reason %></div>
+			<div class="content" id="reporting_date"><%= reporting_date %></div>
 		</li>
 <%
 			}
@@ -119,7 +119,7 @@
 			ResultSet rs = pstmt.executeQuery();
 		 while(rs.next()){
 %>
-	<li class="butns">
+	<li>
 		<button class="update-button" budget_no="<%= rs.getInt("budget_no") %>">수정</button>
 		<button class="delete-button" budget_no="<%= rs.getInt("budget_no") %>">삭제</button>
 	</li>
@@ -133,18 +133,6 @@
       	</ul>
       </div>
     </div>	
-    
-    
-    <div class="Box2">
-        <select class="search">
-          <option value="search1" selected>거래처명</option>
-          <option value="search1" >거래 품목</option>
-          <option value="search1" >원산지</option>
-          <option value="search1" >Tel</option>
-        </select>
-        <input class="box5"></input>
-        <button class="btn1">검색</button>
-      </div>
     </div>
     </div>
   </div>
@@ -169,10 +157,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -245,6 +235,7 @@
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
 	
 //------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
@@ -302,6 +293,10 @@
     	}
     }
     
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
+    
  // ------------ Personal 함수 --------------------
     function Logout_open() {
     	if(LogoutBox.style.height == '0px') {
@@ -323,7 +318,7 @@
 
   	for(let i = 0; i < updatebutton.length; i++) {
   		updatebutton[i].addEventListener('click', function(){
-  	  		const cor_name = updatebutton[i].getAttribute("cor_name");
+  	  		const budget_no = updatebutton[i].getAttribute("budget_no");
   	  		location.href = './Accounting_update.jsp?user_id=' + '<%= user_id %>' + '&budget_no='+ budget_no;
   	  	});
   	}
@@ -333,7 +328,7 @@
 
   	for(let i = 0; i < deletebutton.length; i++) {
   		deletebutton[i].addEventListener('click', function(){
-  	  		const cor_name = deletebutton[i].getAttribute("cor_name");
+  	  		const budget_no = deletebutton[i].getAttribute("budget_no");
   	  		if(confirm('삭제하시겠습니까?')){
   	  		location.href = './Accounting_delete.jsp?user_id=' + '<%= user_id %>' + '&budget_no='+ budget_no;
   	  		}

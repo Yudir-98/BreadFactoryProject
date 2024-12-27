@@ -89,14 +89,14 @@
 %>
    <script>
    alert('삭제되었습니다.');
-   location.href = './Human_Resource.jsp';
+   location.href = './Human_Resource.jsp?user_id=' + '<%= user_id %>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('삭제되지않았습니다.');
-   location.href = './Human_Resource.jsp';
+   location.href = './Human_Resource.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }

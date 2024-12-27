@@ -7,11 +7,15 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="DBConnection.DBManager" %>
 <%@ page import="Link.Link" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.time.LocalDate" %>
 <%
 	String user_id = request.getParameter("user_id");
 	String department_id = request.getParameter("department_id");
 	Integer message_count = 0;
 	String emp_id = "";
+	Integer bno = Integer.parseInt(request.getParameter("bno"));
+	String content_link = "./Board_Content.jsp?user_id=" + user_id + "&bno=";
 	
 	//java로 sql실행하여 데이터 삽입하기
 	Connection conn = DBManager.getDBConnection();
@@ -35,97 +39,76 @@
 			e.printStackTrace();
 		}
 %>
-<%
 
-	conn = DBManager.getDBConnection();
-	
-	emp_id = request.getParameter("emp_id");
-	String emp_id_now = emp_id;
-	String emp_name = "";
-	String birth_date = "";
-	String phone_number = "";
-	String hire_date = "";
-	String position = "";
-	String salary = "";
-	String user_password = "";
-	String user_email = "";
-	String user_nickname = "";
-
-%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="EUC-KR">
-<title>인사 관리 수정 페이지</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="./css/Board-update.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/Board_Content.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
 </head>
 <body>
-	<div class="fullScreen">
-		<div class="MainContent">
-			<div class="Announcement">
-				<h1>&nbsp;수 정</h1>
-			</div>
-      <div class="content">
-<% 
+  <div class="fullScreen">
+    <div class="MainContent">
+      <div class="box1">
+        <div class="Announcement">
+          게시판
+        </div>
+      </div>
+      <div class="box2">
+      	
+      	<div class="line"></div>
+      </div>
+      <div class="Board_Content"> 
+<%
+		String title = "";
+		String nickname = "";
+		String write_date = "";
+		String content = "";
+		String writer = "";
+		
+		//java로 sql실행하여 데이터 삽입하기
 		conn = DBManager.getDBConnection();
 		
-		sql = "SELECT a.emp_id, a.emp_name, a.birth_date, a.phone_number, a.hire_date, c.dept_name, a.position, a.salary, d.user_id, d.user_password, d.user_email, d.user_nickname " +
-			 	"FROM EMPLOYEES a, DEPT_EMP b, DEPARTMENT c, USERS d " + 
-				"WHERE a.emp_id = b.emp_id AND b.dept_id = c.dept_id AND a.user_id = d.user_id " +
-			 	"AND a.emp_id = ? ";
-		try{
+		sql = "SELECT title, content, nickname, write_date, writer " +
+					 "FROM board " + 
+					 "WHERE bno = ?";
+		
+		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, emp_id_now);
+			pstmt.setInt(1, bno);
 			
 			ResultSet rs = pstmt.executeQuery();
+			
 			rs.next();
-			emp_name = rs.getString("emp_name");
-			birth_date = rs.getString("birth_date");
-			phone_number = rs.getString("phone_number");
-			hire_date = rs.getString("hire_date");
-			position = rs.getString("position");
-			salary = rs.getString("salary");
-			user_id = rs.getString("user_id");
-			user_password = rs.getString("user_password");
-			user_email = rs.getString("user_email");
-			user_nickname = rs.getString("user_nickname");
+			
+			title = rs.getString("title");
+			nickname = rs.getString("nickname");
+			content = rs.getString("content");
+			write_date = rs.getString("write_date");
+			writer = rs.getString("writer");
 			
 			DBManager.dbClose(conn, pstmt, rs);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 %>
-		<form id="form_information" action="./Board_update_form.jsp" method="POST">
-	        사원 번호 &nbsp;&nbsp;&nbsp;: <input type="text" value="<%= emp_id %>" name="emp_id" required>
-	        <br>
-	        사원 이름 &nbsp;&nbsp;&nbsp;: <input type="text" value="<%= emp_name %>" name="emp_name" required>
-	        <br>
-	        생년월일 &nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= birth_date %>" name="birth_date" required>
-	        <br>
-	        핸드폰번호 &nbsp;: <input type="text" value="<%= phone_number %>" name="phone_number" required>
-	        <br>
-	        입사일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= hire_date %>" name="hire_date" required>
-	        <br>
-	        직책 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= position %>" name="position" required>
-	        <br>
-	        급여 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= salary %>" name="salary" required>
-	        <hr>
-	        아이디 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= user_id %>" name="user_id" required>
-	        <br>
-	        비밀번호 &nbsp;&nbsp;&nbsp;: <input type="password" value="<%= user_password %>" name="user_password" required>
-	        <br>
-	        이메일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="email" value="<%= user_email %>"  name="user_email" required>
-	        <br>
-	        닉네임 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" value="<%= user_nickname %>" name="user_nickname" >
-	         </form>
-	        <div class="buttons">
-	        <button class="update-button">수 정</button>
-	        <button class="cancel-button">취 소</button>
-       
-        </div>
+	  <div class="metadata">
+	  	<h1><%= title %></h1>
+	  	<div class="write_data">
+	  		<div class="board_writer"><%= nickname %></div>
+	  		<div class="board_write_date"><%= write_date %></div>
+	  	</div>
+	  </div>
+	  <div class="media">
+	  	<%= content %>
+	  </div>
       </div>
-		 <!-- 메뉴 바 -->
+  </div>
+<!-- 메뉴 바 -->
 
 	<div class="MenuButton">
       <div class="menuButtonBar"></div>
@@ -145,10 +128,12 @@
 			sql ="SELECT work FROM DEPT_WORK " +
 						"WHERE dept_id = ?";
 			
+			if(department_id.equals("1")) sql="SELECT work FROM DEPT_WORK ";
+			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, department_id);
+				if(!(department_id.equals("1"))) pstmt.setString(1, department_id);
 				
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
@@ -213,23 +198,25 @@
       <div id="Logout_box"><a href='./Main.jsp'>로그아웃</a></div>
     </div>
 <!-- 여기까지 -->
-	</div>
-	<script>
-	//------------ 메뉴박스 --------------------
+  </div>
+   <script>
+//------------ 메뉴박스 --------------------
 	let user_id = "<%= user_id %>";
-		let MenuButton = document.querySelector(".MenuButton");
+  	let MenuButton = document.querySelector(".MenuButton");
 	let Workmenu = document.querySelector(".Workmenu");
 	let menu_WorksBox = document.querySelector(".menu_WorksBox");
 	let WorksBox_Tag = document.querySelector(".WorksBox_Tag");
-
-	//------------ Personal 박스 --------------------
+	let Menu_BoardBox = document.querySelector(".Menu_BoardBox");
+  
+//------------ Personal 박스 --------------------
 	let messageBox = document.querySelector("#message_box");
 	let LoginBox = document.querySelector("#Login_box");
 	let LogoutBox = document.querySelector("#Logout_box");
 	let MainContent = document.querySelector(".MainContent");
 	let LogoutBox_opend = false;
+  
 	
-	 // ------------ Personal 박스 --------------------
+  	 // ------------ Personal 박스 --------------------
    	if(user_id == "null") {
    		messageBox.style.opacity = 0;
    		messageBox.disabled = true;
@@ -278,6 +265,10 @@
     	}
     }
     
+    Menu_BoardBox.addEventListener ('click', function() {
+    	location.href='./Board.jsp?user_id=' + '<%= user_id %>';
+    });
+    
  // ------------ Personal 함수 --------------------
     function Logout_open() {
     	if(LogoutBox.style.height == '0px') {
@@ -286,21 +277,8 @@
 			LogoutBox.style.height = '0px';
 		}
     }  	
-	//취소 버튼 눌렀을 때
-	let cancelbutton = document.querySelector('.cancel-button');
-	
-	cancelbutton.addEventListener('click', function(){
-		location.href = './Accounting.jsp'
-	});
-	//수정 버튼 눌렀을 때
-	let updatebutton = document.querySelector('.update-button');
-	const form_information = document.getElementById('form_information');
-	
-	updatebutton.addEventListener('click', function(){
-		event.preventDefault();  // 기본 동작을 막음
-	    
-	    form_information.submit();   // form1의 action값으로 input데이터를 이동
-	});
-	</script>
+
+ 
+  </script>
 </body>
 </html>

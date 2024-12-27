@@ -12,6 +12,7 @@
 <% 
 	Connection conn = DBManager.getDBConnection();
 
+	String user_id = request.getParameter("user_id");
 	String material = request.getParameter("material");
 	Integer amount = Integer.parseInt(request.getParameter("amount"));
 	String unit = request.getParameter("unit");
@@ -42,14 +43,14 @@
 %>
    <script>
    alert('추가되었습니다.');
-   location.href = './Inventory.jsp';
+   location.href = './Inventory.jsp?user_id=' + '<%= user_id %>';
    </script>
 <%
    } else {
 %>
 <script>
    alert('추가되지않았습니다.');
-   location.href = './Inventory_add.jsp'
+   location.href = './Inventory_add.jsp?user_id=' + '<%= user_id %>';
 </script>
 <%
    }
