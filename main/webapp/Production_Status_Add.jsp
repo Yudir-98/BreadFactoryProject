@@ -179,7 +179,7 @@
 	let cancelbutton = document.querySelector('.cancel-button');
 	
 	cancelbutton.addEventListener('click', function(){
-		location.href = './Production_Status.jsp'
+		location.href = './Production_Status.jsp?user_id=' + '<%= user_id %>';
 	});
 	
 	//추가버튼 눌렀을 때
